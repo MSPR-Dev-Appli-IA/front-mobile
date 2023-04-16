@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mspr": {
+    "front-mobile": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mspr",
+            "outputPath": "dist/front-mobile",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -30,8 +30,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles"
+              ]
+            },
+
             "scripts": []
           },
           "configurations": {
@@ -65,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "mspr:build:production"
+              "browserTarget": "front-mobile:build:production"
             },
             "development": {
-              "browserTarget": "mspr:build:development"
+              "browserTarget": "front-mobile:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mspr:build"
+            "browserTarget": "front-mobile:build"
           }
         },
         "test": {
@@ -93,12 +99,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/styles/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "dffc2aae-8d98-4fde-8c46-ffeb939eb3ad"
   }
 }

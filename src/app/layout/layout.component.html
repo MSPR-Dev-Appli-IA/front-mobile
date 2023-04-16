@@ -1,0 +1,38 @@
+<ng-container *ngIf="isMobile$ | async; else desktop">
+    <div class="mobile-layout">
+        <div class="mobile-layout__content">
+            <router-outlet></router-outlet>
+        </div>
+        <mat-button-toggle-group [value]="path">
+            <mat-button-toggle aria-label="Carte" value="map" (click)="navigate('map')">
+                <mat-icon>map</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle aria-label="Mes plantes" value="plants" (click)="navigate('plants')">
+                <mat-icon>forest</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle aria-label="Messages" value="messages" (click)="navigate('messages')">
+                <mat-icon>message</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle aria-label="Profile" value="profile" (click)="navigate('profile')">
+                <mat-icon>person</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+</ng-container>
+<ng-template #desktop>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li>
+               Mes plantes
+            </li>
+            <li>
+                Messages
+            </li>
+            <li>
+                Profile
+            </li>
+        </ul>
+    </nav>
+    <router-outlet></router-outlet>
+</ng-template>

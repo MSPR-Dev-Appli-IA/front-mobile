@@ -1,0 +1,20 @@
+@use 'variables';
+@use 'functions';
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  min-width: functions.toRem(150);
+  max-width: functions.toRem(500);
+  width: 100%;
+  padding: functions.toRem(50);
+  gap: functions.toRem(10);
+
+  button {
+    align-self: flex-end;
+  }
+}
+
+.login-full-width {
+  width: 100%;
+}

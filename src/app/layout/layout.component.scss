@@ -1,0 +1,24 @@
+.mobile-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__content {
+    flex: 1 0 auto;
+  }
+}
+
+mat-button-toggle-group {
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+}
+
+mat-button-toggle {
+  width: 100%;
+}
+
+
