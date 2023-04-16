@@ -5,7 +5,7 @@ import { LayoutComponent } from "./layout/layout.component";
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'x', component: LayoutComponent, children: [
-      // { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+      { path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule) }
     ]
   },
   { path: '', redirectTo: '/auth', pathMatch: 'full' },

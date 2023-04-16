@@ -3,17 +3,17 @@
         <div class="mobile-layout__content">
             <router-outlet></router-outlet>
         </div>
-        <mat-button-toggle-group>
-            <mat-button-toggle aria-label="Carte" routerLink="/home">
+        <mat-button-toggle-group [value]="path">
+            <mat-button-toggle aria-label="Carte" value="map" (click)="navigate('map')">
                 <mat-icon>map</mat-icon>
             </mat-button-toggle>
-            <mat-button-toggle aria-label="Mes plantes" routerLink="/plants">
+            <mat-button-toggle aria-label="Mes plantes" value="plants" (click)="navigate('plants')">
                 <mat-icon>forest</mat-icon>
             </mat-button-toggle>
-            <mat-button-toggle aria-label="Messages" routerLink="messages">
+            <mat-button-toggle aria-label="Messages" value="messages" (click)="navigate('messages')">
                 <mat-icon>message</mat-icon>
             </mat-button-toggle>
-            <mat-button-toggle aria-label="Profile" routerLink="profile">
+            <mat-button-toggle aria-label="Profile" value="profile" (click)="navigate('profile')">
                 <mat-icon>person</mat-icon>
             </mat-button-toggle>
         </mat-button-toggle-group>
