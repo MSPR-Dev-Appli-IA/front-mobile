@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import * as mapboxgl from "mapbox-gl";
+import * as mapboxgl from 'mapbox-gl';
 import { geojson } from './map-source';
 
 @Component({
   selector: 'app-map-page',
   templateUrl: './map-page.component.html',
-  styleUrls: ['./map-page.component.scss']
+  styleUrls: ['./map-page.component.scss'],
 })
 export class MapPageComponent implements OnInit {
   map!: mapboxgl.Map;
@@ -57,6 +57,5 @@ export class MapPageComponent implements OnInit {
         }
       });
     });
-
   }
 }

@@ -1,23 +1,29 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from "@angular/cdk/layout";
-import { map, Observable } from "rxjs";
-import { ActivatedRoute, Router } from "@angular/router";
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
+import { map, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
   isMobile$: Observable<boolean>;
-  path = 'map'
+  path = 'map';
 
-  constructor(private responsive: BreakpointObserver, private router: Router, private route: ActivatedRoute) {
-    this.isMobile$ = this.responsive.observe(Breakpoints.HandsetPortrait).pipe(
-        map(
-            result => result.matches ? true : false
-        )
-    );
+  constructor(
+    private responsive: BreakpointObserver,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.isMobile$ = this.responsive
+      .observe(Breakpoints.HandsetPortrait)
+      .pipe(map((result: BreakpointState): boolean => result.matches));
   }
 
   navigate(path: string): void {

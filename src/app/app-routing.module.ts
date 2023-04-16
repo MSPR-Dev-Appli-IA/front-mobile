@@ -1,18 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from "./layout/layout.component";
+import { LayoutComponent } from './layout/layout.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'x', component: LayoutComponent, children: [
-      { path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule) }
-    ]
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: 'x',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'map',
+        loadChildren: () => import('./map/map.module').then(m => m.MapModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./profile/profile.module').then(m => m.ProfileModule),
+      },
+      {
+        path: 'plants',
+        loadChildren: () =>
+          import('./plants/plants.module').then(m => m.PlantsModule),
+      },
+      {
+        path: 'messages',
+        loadChildren: () =>
+          import('./messages/messages.module').then(m => m.MessagesModule),
+      },
+      { path: 'not-found', component: NotFoundComponent },
+    ],
+  },
+  { path: '**', redirectTo: '/x/not-found' },
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
