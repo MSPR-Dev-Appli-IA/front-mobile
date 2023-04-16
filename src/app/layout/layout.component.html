@@ -1,1 +1,38 @@
-<p>layout works!</p>
+<ng-container *ngIf="isMobile$ | async; else desktop">
+    <div class="mobile-layout">
+        <div class="mobile-layout__content">
+            <router-outlet></router-outlet>
+        </div>
+        <mat-button-toggle-group>
+            <mat-button-toggle aria-label="Carte" routerLink="/home">
+                <mat-icon>map</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle aria-label="Mes plantes" routerLink="/plants">
+                <mat-icon>forest</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle aria-label="Messages" routerLink="messages">
+                <mat-icon>message</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle aria-label="Profile" routerLink="profile">
+                <mat-icon>person</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+</ng-container>
+<ng-template #desktop>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li>
+               Mes plantes
+            </li>
+            <li>
+                Messages
+            </li>
+            <li>
+                Profile
+            </li>
+        </ul>
+    </nav>
+    <router-outlet></router-outlet>
+</ng-template>

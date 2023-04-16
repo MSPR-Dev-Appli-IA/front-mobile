@@ -34,7 +34,8 @@
     padding-bottom: functions.toRem(50);
 
     .h1 {
-      font-size: functions.toRem(78) ;
+      font-size: functions.toRem(78);
+      white-space: nowrap;
     }
   }
 
@@ -56,5 +57,13 @@
 
   &__form {
     background-color: variables.$white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-tab-group {
+      width: 100%;
+      max-width: functions.toRem(500);
+    }
   }
 }

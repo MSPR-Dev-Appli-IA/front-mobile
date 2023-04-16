@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent {
-
+  login() {
+    // login handler
+    console.log('login');
+  }
 }
