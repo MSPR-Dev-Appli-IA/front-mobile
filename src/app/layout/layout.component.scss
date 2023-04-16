@@ -1,3 +1,6 @@
+@use "variables";
+@use "functions";
+
 .mobile-layout {
   display: flex;
   flex-direction: column;
@@ -6,19 +9,62 @@
   &__content {
     flex: 1 0 auto;
   }
+
+  mat-button-toggle-group {
+    display: flex;
+    flex-shrink: 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+  }
+
+  mat-button-toggle {
+    width: 100%;
+  }
 }
 
-mat-button-toggle-group {
+.desktop-layout {
   display: flex;
-  flex-shrink: 0;
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
-  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  flex: 1 0 auto;
+
+  .nav {
+    flex: 1;
+    flex-shrink: 0;
+    min-height: 100px;
+    max-height: 100px;
+    background-color: variables.$primary;
+    color: variables.$white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 functions.toRem(35);
+
+    &__logo {
+      display: flex;
+      align-items: center;
+      gap: functions.toRem(15);
+    }
+
+    .logo-text {
+      font-size: functions.toRem(36);
+    }
+
+    &__links {
+      display: flex;
+      align-items: center;
+      gap: functions.toRem(15);
+    }
+
+    a {
+      text-decoration: none;
+      color: variables.$white;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    height: 100%;
+  }
 }
-
-mat-button-toggle {
-  width: 100%;
-}
-
-

@@ -1,5 +1,5 @@
-@use 'variables';
-@use 'functions';
+@use "variables";
+@use "functions";
 
 .auth-page {
   display: flex;
@@ -51,7 +51,7 @@
     a {
       text-decoration: none;
       color: variables.$white;
-      font-size: functions.toRem(20);;
+      font-size: functions.toRem(20);
     }
   }
 

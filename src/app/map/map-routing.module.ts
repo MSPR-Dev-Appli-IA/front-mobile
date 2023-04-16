@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MapPageComponent } from "./map-page/map-page.component";
+import { MapPageComponent } from './map-page/map-page.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: MapPageComponent
-    }
+  {
+    path: '',
+    component: MapPageComponent,
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class MapRoutingModule { }
+export class MapRoutingModule {}
