@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: 'x',
     component: LayoutComponent,
+    // canActivate: [() => inject(AuthGuard).canActivate()],
     children: [
       {
         path: 'map',

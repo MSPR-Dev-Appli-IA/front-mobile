@@ -9,6 +9,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, NotFoundComponent],
@@ -19,6 +20,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
     MatButtonToggleModule,
     MatIconModule,
     NgOptimizedImage,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
