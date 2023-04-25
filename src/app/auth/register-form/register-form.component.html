@@ -1,1 +1,46 @@
-<p>register-form works!</p>
+<form
+  [formGroup]="form"
+  class="login-form"
+  (ngSubmit)="register()"
+  appValidatePassword>
+  <mat-form-field class="login-full-width">
+    <mat-icon matPrefix>person</mat-icon>
+    <mat-label>Nom d'utilisateur</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="username"
+      placeholder="Pseudo" />
+  </mat-form-field>
+  <mat-form-field class="login-full-width">
+    <mat-icon matPrefix>mail</mat-icon>
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Email"
+      email />
+  </mat-form-field>
+  <mat-form-field class="login-full-width">
+    <mat-icon matPrefix>key</mat-icon>
+    <mat-label>Mot de passe</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="password"
+      placeholder="Mot de passe" />
+  </mat-form-field>
+  <mat-form-field class="login-full-width">
+    <mat-label>Mot de passe</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="passwordVerify"
+      placeholder="Confirmer le mot de passe" />
+    <mat-error *ngIf="form.errors?.['passwordVerified']"></mat-error>
+    <p>{{ form.errors?.['passwordVerified'] }}</p>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">S'INSCRIRE</button>
+</form>
