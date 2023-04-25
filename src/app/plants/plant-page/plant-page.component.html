@@ -1,1 +1,5 @@
-<p>plant-page works!</p>
+<div *ngIf="plants | async as plants">
+  <div *ngFor="let plant of plants">
+    <app-list-item [plant]="plant"></app-list-item>
+  </div>
+</div>

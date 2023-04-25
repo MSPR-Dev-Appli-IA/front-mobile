@@ -8,5 +8,6 @@ import { MessagesRoutingModule } from './messages-routing.module';
 @NgModule({
   declarations: [MessagePageComponent, MessageListComponent, ListItemComponent],
   imports: [CommonModule, MessagesRoutingModule],
+  exports: [ListItemComponent],
 })
 export class MessagesModule {}
