@@ -15,10 +15,17 @@ export class UserPlantsService {
     console.log('askForAdvice', plantId);
     this.http.post('/api/plants/' + plantId + '/ask-for-advice', {});
   }
+
+  savePlant(plant: Plant) {
+    this.http.post('/api/plants/' + plant.id + '/save', {
+      plant: plant,
+    });
+  }
 }
 
 export interface Plant {
   id: number;
+  name: string;
   description: string;
   imageUrls: string[];
   species: Species;
@@ -37,6 +44,7 @@ export interface Species {
 const PLANTS: Plant[] = [
   {
     id: 1,
+    name: 'Ficascio',
     description: '',
     imageUrls: ['plant.png'],
     species: {
@@ -44,13 +52,14 @@ const PLANTS: Plant[] = [
       description: 'A beautiful plantae of the bikonta subdomain.',
       sunExposure: 'Moyenne',
       watering: '2 fois / jour',
-      optimalTemperature: '',
+      optimalTemperature: '17°C',
     },
     hasRequest: true,
     hasAdvice: true,
   },
   {
     id: 2,
+    name: 'Modulos',
     description: '',
     imageUrls: ['plant.png'],
     species: {
@@ -61,6 +70,6 @@ const PLANTS: Plant[] = [
       optimalTemperature: '15°C',
     },
     hasRequest: false,
-    hasAdvice: true,
+    hasAdvice: false,
   },
 ];

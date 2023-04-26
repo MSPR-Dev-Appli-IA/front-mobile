@@ -7,6 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  OverlayModule,
+} from '@angular/cdk/overlay';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PlantPageComponent, ListItemComponent],
@@ -18,6 +24,11 @@ import { MatInputModule } from '@angular/material/input';
     NgOptimizedImage,
     MatFormFieldModule,
     MatInputModule,
+    CdkConnectedOverlay,
+    CdkOverlayOrigin,
+    OverlayModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class PlantsModule {}

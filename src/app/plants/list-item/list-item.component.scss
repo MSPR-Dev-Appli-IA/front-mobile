@@ -37,6 +37,12 @@
         font-size: functions.toRem(36);
     }
 
+    &__latin {
+        font-weight: lighter;
+        font-style: italic;
+        font-size: functions.toRem(5);
+    }
+
     &__property {
         font-weight: normal;
         font-size: functions.toRem(16);
@@ -57,6 +63,23 @@
         &__group {
             display: flex;
             gap: functions.toRem(30);
+
+            .button--cancel {
+                background-color: variables.$cancel;
+                color: variables.$white;
+                border: none;
+            }
+            .button--purple-light {
+                background-color: variables.$purple-light;
+                color: variables.$white;
+                border: none;
+            }
+            .button--confirm {
+                background-color: variables.$confirm;
+                color: variables.$white;
+                border: none;
+            }
+
         }
 
         &__functional {
@@ -64,9 +87,13 @@
             justify-content: center;
             gap: 0.5rem;
 
-            button {
+            .button {
                 background-color: transparent;
                 border: none;
+                color: variables.$primary;
+                font-size: functions.toRem(16);
+                font-weight: bold;
+                cursor: default;
             }
 
             button:hover {
@@ -81,5 +108,49 @@
         align-items: flex-start;
         justify-content: space-between;
         gap: 0.5rem;
+    }
+}
+
+.image-modal {
+    background-color: variables.$white;
+    border-radius: functions.toRem(10);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    max-height: functions.toRem(400);
+    overflow: auto;
+
+    &__content {
+        display: flex;
+        margin: functions.toRem(30);
+        flex-direction: column;
+        min-height: min-content;
+    }
+
+    &__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__input {
+        display: flex;
+    }
+
+    .button--confirm {
+        background-color: variables.$confirm;
+        color: variables.$white;
+        border: none;
+    }
+
+    .transparent {
+        background-color: transparent;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
