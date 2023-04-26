@@ -18,16 +18,16 @@ export class PlantPageComponent implements OnInit {
 
   applyFilter(event: Event) {
     console.log((<HTMLInputElement>event.target).value);
-    this.plants = this.service
-      .getPlants()
-      .pipe(
-        map(plants =>
-          plants.filter(plant =>
-            plant.species.name
-              .toLowerCase()
-              .includes((<HTMLInputElement>event.target).value.toLowerCase())
-          )
-        )
-      );
+    this.plants = this.service.getPlants().pipe(
+      map(plants =>
+        plants.filter(plant => {
+          const input = (<HTMLInputElement>event.target).value.toLowerCase();
+          return (
+            plant.species.name.toLowerCase().includes(input) ||
+            plant.name.toLowerCase().includes(input)
+          );
+        })
+      )
+    );
   }
 }

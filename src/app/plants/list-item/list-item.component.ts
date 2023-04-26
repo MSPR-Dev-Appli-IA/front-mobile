@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ListItemComponent {
   @Input() plant!: Plant;
+  isOpen = false;
   constructor(private service: UserPlantsService, private router: Router) {}
 
   askForAdvice(): void {
@@ -26,11 +27,25 @@ export class ListItemComponent {
     console.log('editImage');
   }
 
-  openEditModal(): void {
-    console.log('openEditModal');
+  toggleModal(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  addImageInput(): void {
+    this.plant.imageUrls.push('');
+  }
+
+  removeImageInput(idx: number): void {
+    this.plant.imageUrls.splice(idx, 1);
   }
 
   openRemoveModal(): void {
     console.log('openEditModal');
+  }
+
+  savePlant() {
+    this.plant.imageUrls.filter(url => url !== '');
+    console.log('savePlant');
+    this.toggleModal();
   }
 }
