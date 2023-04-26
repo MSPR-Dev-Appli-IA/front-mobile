@@ -1,1 +1,14 @@
-<p>plant-page works!</p>
+<div class="plant-page">
+  <mat-form-field class="example-full-width">
+    <mat-icon matPrefix>search</mat-icon>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Explorez vos plantes" />
+  </mat-form-field>
+  <div *ngIf="plants | async as plants">
+    <div *ngFor="let plant of plants">
+      <app-list-item [plant]="plant"></app-list-item>
+    </div>
+  </div>
+</div>
