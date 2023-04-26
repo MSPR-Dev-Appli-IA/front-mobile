@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Plant, UserPlantsService } from '../plants.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-plant-page',
@@ -13,5 +14,20 @@ export class PlantPageComponent implements OnInit {
 
   ngOnInit() {
     this.plants = this.service.getPlants();
+  }
+
+  applyFilter(event: Event) {
+    console.log((<HTMLInputElement>event.target).value);
+    this.plants = this.service
+      .getPlants()
+      .pipe(
+        map(plants =>
+          plants.filter(plant =>
+            plant.species.name
+              .toLowerCase()
+              .includes((<HTMLInputElement>event.target).value.toLowerCase())
+          )
+        )
+      );
   }
 }

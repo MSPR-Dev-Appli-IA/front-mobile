@@ -11,14 +11,26 @@ export class ListItemComponent {
   @Input() plant!: Plant;
   constructor(private service: UserPlantsService, private router: Router) {}
 
-  askForAdvice() {
+  askForAdvice(): void {
     this.plant.hasAdvice = true;
     this.service.askForAdvice(this.plant.id);
   }
 
-  seeAdvice() {
+  seeAdvice(): void {
     this.router.navigate(['messages', 'advice'], {
       queryParams: { plantId: this.plant.id },
     });
+  }
+
+  editImage(): void {
+    console.log('editImage');
+  }
+
+  openEditModal(): void {
+    console.log('openEditModal');
+  }
+
+  openRemoveModal(): void {
+    console.log('openEditModal');
   }
 }

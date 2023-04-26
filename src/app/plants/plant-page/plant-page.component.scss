@@ -1,0 +1,15 @@
+@use "variables";
+@use "functions";
+
+.plant-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: functions.toRem(40);
+
+  mat-form-field {
+    width: 50%;
+    background-color: transparent;
+
+  }
+}
