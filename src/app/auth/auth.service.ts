@@ -47,12 +47,14 @@ export class AuthService {
 
 export interface User {
   id: number;
+  rating: number;
+  imageUrl: string;
   firstName: string;
   lastName: string;
   role: Role;
   username: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 export enum Role {
