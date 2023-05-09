@@ -1,0 +1,58 @@
+@use "variables";
+@use "functions";
+
+.message-page {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 3fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "list messages";
+
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+    padding: functions.toRem(80);
+    font-size: functions.toRem(30);
+
+    mat-icon {
+      align-self: flex-start;
+      font-size: functions.toRem(50);
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+}
+
+.list {
+  grid-area: list;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.messages {
+  grid-area: messages;
+
+  &__button-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    gap: functions.toRem(10);
+    height: functions.toRem(56);
+    padding: 0 functions.toRem(20);
+
+    button, mat-icon {
+      border-color: variables.$purple;
+    }
+  }
+
+  &__window {
+    height: 100%;
+  }
+}
+
+

@@ -1,1 +1,33 @@
-<p>list-item works!</p>
+<div
+  class="conversation"
+  [class.--selected]="selected"
+  (click)="onSelectConversation()">
+  <div class="circle" *ngIf="!!initials">
+    <p class="circle-inner">{{ initials }}</p>
+  </div>
+  <div class="conversation__content">
+    {{ conversation.sender_name }}
+    <p class="conversation__sender-name">
+      {{
+        conversation.last_message.content.length > 50
+          ? (conversation.last_message.content | slice : 0 : 50) + '...'
+          : conversation.last_message.content
+      }}
+    </p>
+    <span class="conversation__hour">
+      {{ fromNow }}
+    </span>
+  </div>
+  <div class="markers">
+    <div>
+      <mat-icon class="markers__favorite" *ngIf="conversation.favorite">
+        star
+      </mat-icon>
+      <div *ngIf="conversation.unread_count > 0" class="markers__unread">
+        <span>
+          {{ conversation.unread_count }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,31 @@
-<p>message-list works!</p>
+<mat-form-field class="search">
+  <mat-icon matPrefix>search</mat-icon>
+  <input matInput type="text" placeholder="Rechercher" [value]="searchValue" />
+</mat-form-field>
+<mat-tab-group>
+  <mat-tab label="MESSAGES">
+    <app-list-item
+      *ngFor="let conversation of messages | async"
+      [selected]="selectedConversationId === conversation.id"
+      (selectConversation)="selectConversation($event)"
+      [routerLink]="[conversation.id]"
+      routerLinkActive="--selected"
+      [conversation]="conversation"></app-list-item>
+  </mat-tab>
+  <mat-tab label="DEMANDES">
+    <app-list-item
+      *ngFor="let conversation of demands | async"
+      [selected]="selectedConversationId === conversation.id"
+      (selectConversation)="selectConversation($event)"
+      [routerLink]="[conversation.id]"
+      [conversation]="conversation"></app-list-item>
+  </mat-tab>
+  <mat-tab label="CONSEILS">
+    <app-list-item
+      *ngFor="let conversation of advices | async"
+      [selected]="selectedConversationId === conversation.id"
+      (selectConversation)="selectConversation($event)"
+      [routerLink]="[conversation.id]"
+      [conversation]="conversation"></app-list-item>
+  </mat-tab>
+</mat-tab-group>
