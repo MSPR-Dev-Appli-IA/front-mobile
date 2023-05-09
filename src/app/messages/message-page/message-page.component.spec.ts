@@ -8,7 +8,7 @@ describe('MessagePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MessagePageComponent],
+      declarations: [MessagePageComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MessagePageComponent);

@@ -1,1 +1,30 @@
-<p>message-page works!</p>
+<div class="message-page">
+  <div class="list">
+    <app-message-list></app-message-list>
+  </div>
+
+  <div *ngIf="selectedConversationId > 0; else placeholder" class="messages">
+    <div class="messages__button-bar">
+      <button mat-stroked-button>
+        <mat-icon>how_to_reg</mat-icon>
+        VALIDER L'ECHANGE
+      </button>
+      <button mat-stroked-button>
+        <mat-icon>stars</mat-icon>
+        METTRE EN FAVORIS
+      </button>
+    </div>
+    <div class="messages__window">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <ng-template #placeholder>
+    <div class="message-page__placeholder">
+      <mat-icon>chat</mat-icon>
+      <div>
+        <h2>Selectionnez une conversation</h2>
+        <p>Vous pouvez selectionner une conversation dans la liste de gauche</p>
+      </div>
+    </div>
+  </ng-template>
+</div>
