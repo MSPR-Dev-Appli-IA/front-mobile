@@ -1,0 +1,85 @@
+@use "functions";
+@use "variables";
+
+.message-window {
+  width: 100%;
+  height: 100%;
+  padding: functions.toRem(60);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 2 0 auto;
+    gap: functions.toRem(10);
+    overflow: auto;
+  }
+
+  &__placeholder {
+    margin: auto;
+    color: rgba(0, 0, 0, 0.5);
+    padding: functions.toRem(30);
+    font-size: functions.toRem(30);
+  }
+
+  .message-container {
+    display: flex;
+
+    &.--current-user {
+      align-self: flex-end;
+    }
+
+    &.--other-user {
+      align-self: flex-start;
+    }
+
+    .message {
+      width: fit-content;
+      margin: 0;
+      padding: functions.toRem(20);
+    }
+
+    .circle {
+      border: functions.toRem(1) solid variables.$black;
+      margin: 0 10px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 40px;
+      height: 40px;
+      background-color: variables.$white;
+      align-self: flex-end;
+
+      .circle-inner {
+        color: variables.$primary-light;
+        text-decoration: none;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .--current-user .message {
+    background-color: variables.$primary;
+    color: variables.$white;
+    border-radius: 20px 20px 0 20px;
+  }
+
+  .--other-user .message {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px 20px 20px 0;
+  }
+
+  &__input {
+    width: 100%;
+    flex: 0 1 auto;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}

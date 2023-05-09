@@ -1,0 +1,7 @@
+.search {
+    width: 100%;
+    overflow-y: hidden;
+    ::ng-deep .mat-mdc-text-field-wrapper{
+        border-radius: 0;
+    }
+}
