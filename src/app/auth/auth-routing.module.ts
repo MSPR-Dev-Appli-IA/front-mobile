@@ -6,12 +6,12 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: AuthPageComponent,
-  },
+    component: AuthPageComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AuthRoutingModule {}

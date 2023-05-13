@@ -4,7 +4,7 @@ import { User } from '../auth/auth.service';
 import { of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProfileService {
   constructor(private http: HttpClient) {}
@@ -18,21 +18,21 @@ export class ProfileService {
       lastName: 'Doe',
       role: 'USER',
       username: 'johndoe',
-      email: 'test@gmail.com',
+      email: 'test@gmail.com'
     } as User);
     // return this.http.get<User>('/api/user');
   }
 
   changeUserData(user: User) {
     return this.http.post('/api/user/change-data', {
-      user,
+      user
     });
   }
 
   changePassword(oldPassword: string, newPassword: string) {
     return this.http.post('/api/user/change-password', {
       oldPassword,
-      newPassword,
+      newPassword
     });
   }
 }

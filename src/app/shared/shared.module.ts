@@ -5,5 +5,6 @@ import { ValidatePasswordDirective } from './validate-password.directive';
 @NgModule({
   declarations: [ValidatePasswordDirective],
   imports: [CommonModule],
+  exports: [ValidatePasswordDirective]
 })
 export class SharedModule {}
