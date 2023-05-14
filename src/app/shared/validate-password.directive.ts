@@ -4,7 +4,7 @@ import {
   NG_VALIDATORS,
   ValidationErrors,
   Validator,
-  ValidatorFn,
+  ValidatorFn
 } from '@angular/forms';
 
 @Directive({
@@ -13,23 +13,23 @@ import {
     {
       provide: NG_VALIDATORS,
       useExisting: ValidatePasswordDirective,
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class ValidatePasswordDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
-    return this.validatePasswordValidator(control);
+    return validatePasswordValidator(control);
   }
-
-  validatePasswordValidator: ValidatorFn = (
-    control: AbstractControl
-  ): ValidationErrors | null => {
-    const password = control.get('password');
-    const passwordVerify = control.get('passwordVerify');
-
-    return password?.value === passwordVerify?.value
-      ? { passwordVerified: true }
-      : null;
-  };
 }
+
+export const validatePasswordValidator: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  const password = control.get('password');
+  const passwordVerify = control.get('passwordVerify');
+
+  return password && passwordVerify && password.value !== passwordVerify.value
+    ? { noPasswordMatch: true }
+    : null;
+};

@@ -11,6 +11,10 @@
       matInput
       formControlName="username"
       placeholder="Pseudo" />
+    <mat-error *ngIf="form.controls['username'].errors?.['pattern']">
+      Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et des
+      tirets
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="login-full-width">
     <mat-icon matPrefix>mail</mat-icon>
@@ -21,6 +25,9 @@
       formControlName="email"
       placeholder="Email"
       email />
+    <mat-error *ngIf="form.controls['email'].errors?.['email']">
+      Email invalide
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="login-full-width">
     <mat-icon matPrefix>key</mat-icon>
@@ -30,16 +37,20 @@
       matInput
       formControlName="password"
       placeholder="Mot de passe" />
+    <mat-error *ngIf="form.controls['password'].errors?.['minlength']">
+      Minimum 8 caractères
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="login-full-width">
-    <mat-label>Mot de passe</mat-label>
+    <mat-label>Confirmer le mot de passe</mat-label>
     <input
       type="password"
       matInput
       formControlName="passwordVerify"
-      placeholder="Confirmer le mot de passe" />
-    <mat-error *ngIf="form.errors?.['passwordVerified']"></mat-error>
-    <p>{{ form.errors?.['passwordVerified'] }}</p>
+      placeholder="Mot de passe" />
+    <mat-error *ngIf="form.errors?.['noPasswordMatch']">
+      Les mots de passe ne correspondent pas
+    </mat-error>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">S'INSCRIRE</button>
