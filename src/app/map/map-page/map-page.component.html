@@ -1,1 +1,11 @@
-<div class="map" id="map" class="match-parent"></div>
+<div class="map-page">
+  <div class="map-page__list">
+    <mat-form-field>
+      <mat-icon matIconPrefix>search</mat-icon>
+      <input matInput type="text" />
+    </mat-form-field>
+    <!--    <app-list-item *ngFor="let listing of listings" [listing]='listing'></app-list-item>-->
+    <app-list-item></app-list-item>
+  </div>
+  <div id="map" class="match-parent map-page__map"></div>
+</div>

@@ -7,21 +7,21 @@
     alt="" />
   <div class="list-item__content">
     <div class="row">
-      <div class="list-item__details">
+      <div *ngIf="plant.species" class="list-item__details">
         <h4 class="list-item__title">
           {{ plant.name }}
           <span class="list-item__property list-item__latin">
             {{ plant.species.name }}
           </span>
         </h4>
-        <span class="list-item__property"
-          >Exposition au soleil : {{ plant.species.sunExposure }}
+        <span class="list-item__property">
+          Exposition au soleil : {{ plant.species.sunExposure }}
         </span>
         <span class="list-item__property">
           Arrosage : {{ plant.species.watering }}
         </span>
-        <span class="list-item__property"
-          >Température optimale : {{ plant.species.optimalTemperature }}
+        <span class="list-item__property">
+          Température optimale : {{ plant.species.optimalTemperature }}
         </span>
       </div>
       <div class="buttons__functional">
@@ -30,10 +30,10 @@
           type="button"
           cdkOverlayOrigin
           #trigger="cdkOverlayOrigin">
-          <mat-icon (click)="toggleModal()">edit</mat-icon>
+          <mat-icon (click)="openDialog()">edit</mat-icon>
         </button>
         <button class="button" type="button">
-          <mat-icon (click)="openRemoveModal()">close</mat-icon>
+          <mat-icon (click)="closeDialog()">close</mat-icon>
         </button>
       </div>
     </div>
@@ -80,71 +80,3 @@
     </div>
   </div>
 </div>
-
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="isOpen">
-  <div class="image-modal">
-    <div class="image-modal__content">
-      <div class="image-modal__header">
-        <h4>Edition de la plante</h4>
-        <button
-          type="button"
-          class="transparent"
-          cdkOverlayOrigin
-          #trigger="cdkOverlayOrigin">
-          <mat-icon (click)="toggleModal()">close</mat-icon>
-        </button>
-      </div>
-
-      <mat-form-field class="login-full-width">
-        <mat-icon matPrefix>forest</mat-icon>
-        <mat-label>Nom</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Name"
-          [(ngModel)]="plant.name" />
-      </mat-form-field>
-      <mat-form-field class="login-full-width">
-        <mat-icon matPrefix>subject</mat-icon>
-        <mat-label>Description</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Description"
-          [(ngModel)]="plant.description" />
-      </mat-form-field>
-      <div class="image-modal__header">
-        <h5>Images</h5>
-        <button
-          type="button"
-          class="transparent"
-          cdkOverlayOrigin
-          #trigger="cdkOverlayOrigin">
-          <mat-icon (click)="addImageInput()">add</mat-icon>
-        </button>
-      </div>
-      <div
-        *ngFor="let url of plant.imageUrls; let index = index"
-        class="image-modal__input">
-        <mat-form-field class="login-full-width">
-          <mat-icon matPrefix>image</mat-icon>
-          <mat-label>Image URL</mat-label>
-          <input type="text" matInput placeholder="Image" [value]="url" />
-        </mat-form-field>
-        <button class="transparent">
-          <mat-icon (click)="removeImageInput(index)">delete</mat-icon>
-        </button>
-      </div>
-      <button
-        type="button"
-        mat-raised-button
-        class="button--confirm"
-        (click)="savePlant()">
-        SAUVEGARDER
-      </button>
-    </div>
-  </div>
-</ng-template>

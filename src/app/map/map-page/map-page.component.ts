@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
@@ -7,10 +7,11 @@ import { MapService } from '../map.service';
 @Component({
   selector: 'app-map-page',
   templateUrl: './map-page.component.html',
-  styleUrls: ['./map-page.component.scss'],
+  styleUrls: ['./map-page.component.scss']
 })
-export class MapPageComponent implements OnInit, OnDestroy {
+export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
   map!: mapboxgl.Map;
+  listings = [];
 
   breakpointSubscription = new Subscription();
   constructor(
