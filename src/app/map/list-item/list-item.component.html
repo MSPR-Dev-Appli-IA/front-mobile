@@ -1,0 +1,29 @@
+<div class="listing">
+  <div class="row">
+    <div class="listing__image">
+      <img src="assets/img/mock/plant.png" alt="plant image" />
+    </div>
+    <div class="column listing__info">
+      <span class="listing__location">
+        <mat-icon>location_on</mat-icon>
+        Quartier XYZ
+      </span>
+      <span listing__name>Ficus Robusta</span>
+      <span>12 mars- 12 decembre</span>
+    </div>
+  </div>
+  <div class="column listing__info" [class.hidden]="isAdditionalInfoHidden">
+    <span>Exposition au soleil : Moyenne</span>
+    <span>Arrosage : 2 fois / jour</span>
+    <span>Température Optimale : 25°C</span>
+    <button class="listing__button" color="" mat-raised-button>
+      FAIRE DEMANDE POUR S'OCCUPER
+    </button>
+  </div>
+  <button
+    class="listing__toggle-button"
+    (click)="isAdditionalInfoHidden = !isAdditionalInfoHidden"
+    [class.rotated]="!isAdditionalInfoHidden">
+    <mat-icon matIconPrefix>arrow_drop_down</mat-icon>
+  </button>
+</div>

@@ -7,41 +7,46 @@ import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'x',
     component: LayoutComponent,
-    // canActivate: [() => inject(AuthGuard).canActivate()],
+    canActivate: [() => inject(AuthGuard).canActivate()],
     children: [
       {
+        path: '',
+        redirectTo: '/x/map',
+        pathMatch: 'full'
+      },
+      {
         path: 'map',
-        loadChildren: () => import('./map/map.module').then(m => m.MapModule),
+        loadChildren: () => import('./map/map.module').then(m => m.MapModule)
       },
       {
         path: 'profile',
         loadChildren: () =>
-          import('./profile/profile.module').then(m => m.ProfileModule),
+          import('./profile/profile.module').then(m => m.ProfileModule)
       },
       {
         path: 'plants',
         loadChildren: () =>
-          import('./plants/plants.module').then(m => m.PlantsModule),
+          import('./plants/plants.module').then(m => m.PlantsModule)
       },
       {
         path: 'messages',
         loadChildren: () =>
-          import('./messages/messages.module').then(m => m.MessagesModule),
+          import('./messages/messages.module').then(m => m.MessagesModule)
       },
-      { path: 'not-found', component: NotFoundComponent },
-    ],
+      { path: 'not-found', component: NotFoundComponent }
+    ]
   },
   { path: '**', redirectTo: '/x/not-found' },
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  { path: '', redirectTo: '/auth', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

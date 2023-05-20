@@ -1,8 +1,4 @@
-<form
-  [formGroup]="form"
-  class="login-form"
-  (ngSubmit)="register()"
-  appValidatePassword>
+<form [formGroup]="form" class="login-form" (ngSubmit)="register()">
   <mat-form-field class="login-full-width">
     <mat-icon matPrefix>person</mat-icon>
     <mat-label>Nom d'utilisateur</mat-label>
@@ -15,6 +11,22 @@
       Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et des
       tirets
     </mat-error>
+  </mat-form-field>
+  <mat-form-field class="login-full-width">
+    <mat-label>Prénom</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="firstname"
+      placeholder="Jean" />
+  </mat-form-field>
+  <mat-form-field class="login-full-width">
+    <mat-label>Nom</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="lastname"
+      placeholder="Dutruc" />
   </mat-form-field>
   <mat-form-field class="login-full-width">
     <mat-icon matPrefix>mail</mat-icon>

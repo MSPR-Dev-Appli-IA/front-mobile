@@ -10,12 +10,19 @@ import { MatInputModule } from '@angular/material/input';
 import {
   CdkConnectedOverlay,
   CdkOverlayOrigin,
-  OverlayModule,
+  OverlayModule
 } from '@angular/cdk/overlay';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { AddEditPlantModalComponent } from './add-edit-plant-modal/add-edit-plant-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [PlantPageComponent, ListItemComponent],
+  declarations: [
+    PlantPageComponent,
+    ListItemComponent,
+    AddEditPlantModalComponent
+  ],
   imports: [
     CommonModule,
     PlantsRoutingModule,
@@ -29,6 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     OverlayModule,
     ReactiveFormsModule,
     FormsModule,
-  ],
+    MatSelectModule,
+    MatDialogModule
+  ]
 })
 export class PlantsModule {}

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthGuard {
   constructor(private router: Router, private authService: AuthService) {}
@@ -14,12 +14,15 @@ export class AuthGuard {
     | boolean
     | UrlTree {
     console.log('CanActivate called');
-    const isLoggedIn = this.authService.isLoggedIn();
-    if (isLoggedIn) {
-      return true;
-    } else {
-      this.router.navigate(['/auth']);
-    }
+    this.authService.isLoggedIn().subscribe(res => {
+      console.log(res);
+    });
+
+    // if (isLoggedIn) {
+    //   return true;
+    // } else {
+    //   this.router.navigate(['/auth']);
+    // }
 
     return true;
   }
