@@ -10,17 +10,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'x',
+    path: '',
     component: LayoutComponent,
     canActivate: [() => inject(AuthGuard).canActivate()],
     children: [
       {
         path: '',
-        redirectTo: '/x/map',
-        pathMatch: 'full'
-      },
-      {
-        path: 'map',
         loadChildren: () => import('./map/map.module').then(m => m.MapModule)
       },
       {
@@ -41,7 +36,7 @@ const routes: Routes = [
       { path: 'not-found', component: NotFoundComponent }
     ]
   },
-  { path: '**', redirectTo: '/x/not-found' },
+  { path: '**', redirectTo: '/not-found' },
   { path: '', redirectTo: '/auth', pathMatch: 'full' }
 ];
 

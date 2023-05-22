@@ -13,10 +13,9 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('CanActivate called');
-    this.authService.isLoggedIn().subscribe(res => {
-      console.log(res);
-    });
+    // this.authService.isLoggedIn().subscribe(res => {
+    //   console.log(res);
+    // });
 
     // if (isLoggedIn) {
     //   return true;

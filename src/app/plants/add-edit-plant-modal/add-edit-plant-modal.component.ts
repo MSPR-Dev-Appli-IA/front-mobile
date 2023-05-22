@@ -12,12 +12,14 @@ import { MatOptionSelectionChange } from '@angular/material/core';
 export class AddEditPlantModalComponent {
   plant: Plant;
   species: Observable<Species[]> | undefined;
+  editMode = false;
 
   constructor(
     public dialogRef: DialogRef<string>,
     @Inject(DIALOG_DATA) public data: ModalData,
     private plantService: UserPlantsService
   ) {
+    this.editMode = !!data.plant;
     this.plant = data.plant
       ? data.plant
       : ({

@@ -1,5 +1,7 @@
 <div class="plant-page">
-  <mat-form-field class="example-full-width">
+  <mat-form-field
+    class="example-full-width"
+    *ngIf="(isMobile$ | async) !== true">
     <mat-icon matPrefix>search</mat-icon>
     <input
       matInput

@@ -1,9 +1,10 @@
-<div class="list-item">
+<div class="list-item" *ngIf="(isMobile$ | async) === false; else mobile">
   <img
     [ngSrc]="'assets/img/mock/' + (plant.imageUrls[0] || 'plant.png')"
     class="list-item__image"
-    width="100"
-    height="100"
+    [width]="100"
+    [height]="100"
+    priority="priority"
     alt="" />
   <div class="list-item__content">
     <div class="row">
@@ -24,15 +25,15 @@
           Température optimale : {{ plant.species.optimalTemperature }}
         </span>
       </div>
-      <div class="buttons__functional">
+      <div class="buttons buttons__functional">
         <button
-          class="button"
+          class="button button--functional"
           type="button"
           cdkOverlayOrigin
           #trigger="cdkOverlayOrigin">
           <mat-icon (click)="openDialog()">edit</mat-icon>
         </button>
-        <button class="button" type="button">
+        <button class="button button--functional" type="button">
           <mat-icon (click)="closeDialog()">close</mat-icon>
         </button>
       </div>
@@ -80,3 +81,85 @@
     </div>
   </div>
 </div>
+
+<ng-template #mobile>
+  <div class="list-item list-item--mobile">
+    <div class="row">
+      <img
+        [ngSrc]="'assets/img/mock/' + (plant.imageUrls[0] || 'plant.png')"
+        class="list-item__image"
+        [width]="100"
+        [height]="100"
+        priority="priority"
+        alt="" />
+      <div *ngIf="plant.species" class="list-item__details column">
+        <div class="row">
+          <h4 class="list-item__title column">
+            {{ plant.name }}
+            <span class="list-item__property list-item__latin">
+              {{ plant.species.name }}
+            </span>
+          </h4>
+          <div class="buttons row">
+            <button
+              class="button button--functional"
+              type="button"
+              cdkOverlayOrigin
+              #trigger="cdkOverlayOrigin">
+              <mat-icon (click)="openDialog()">edit</mat-icon>
+            </button>
+            <button class="button button--functional" type="button">
+              <mat-icon (click)="closeDialog()">close</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <span class="list-item__property">
+          Exposition au soleil : {{ plant.species.sunExposure }}
+        </span>
+        <span class="list-item__property">
+          Arrosage : {{ plant.species.watering }}
+        </span>
+        <span class="list-item__property">
+          Température optimale : {{ plant.species.optimalTemperature }}
+        </span>
+      </div>
+    </div>
+    <div class="buttons buttons--mobile row">
+      <ng-container *ngIf="plant.hasRequest; else noRequest">
+        <button class="button--cancel" type="button" mat-raised-button>
+          <mat-icon>cancel</mat-icon>
+          GARDIENNAGE
+        </button>
+        <button class="button--confirm" type="button" mat-raised-button>
+          <mat-icon>chat</mat-icon>
+          GARDIEN
+        </button>
+      </ng-container>
+      <ng-template #noRequest>
+        <button class="button--confirm" type="button" mat-raised-button>
+          <mat-icon>search</mat-icon>
+          GARDIEN
+        </button>
+      </ng-template>
+      <ng-container *ngIf="plant.hasAdvice; else askAdvice">
+        <button
+          class="button--purple-light"
+          (click)="seeAdvice()"
+          type="button"
+          mat-raised-button>
+          VOIR CONSEIL
+        </button>
+      </ng-container>
+      <ng-template #askAdvice>
+        <button
+          class="button--purple-light"
+          (click)="askForAdvice()"
+          type="button"
+          mat-raised-button>
+          DEMANDER CONSEIL
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

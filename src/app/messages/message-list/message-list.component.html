@@ -1,4 +1,4 @@
-<mat-form-field class="search">
+<mat-form-field class="search" *ngIf="(isMobile$ | async) === false">
   <mat-icon matPrefix>search</mat-icon>
   <input matInput type="text" placeholder="Rechercher" [value]="searchValue" />
 </mat-form-field>
@@ -8,7 +8,10 @@
       *ngFor="let conversation of messages | async"
       [selected]="selectedConversationId === conversation.id"
       (selectConversation)="selectConversation($event)"
-      [routerLink]="[conversation.id]"
+      (click)="setNavigationContext()"
+      [routerLink]="
+        (isMobile$ | async) ? ['mobile', conversation.id] : [conversation.id]
+      "
       routerLinkActive="--selected"
       [conversation]="conversation"></app-list-item>
   </mat-tab>
@@ -17,7 +20,10 @@
       *ngFor="let conversation of demands | async"
       [selected]="selectedConversationId === conversation.id"
       (selectConversation)="selectConversation($event)"
-      [routerLink]="[conversation.id]"
+      (click)="setNavigationContext()"
+      [routerLink]="
+        (isMobile$ | async) ? ['mobile', conversation.id] : [conversation.id]
+      "
       [conversation]="conversation"></app-list-item>
   </mat-tab>
   <mat-tab label="CONSEILS">
@@ -25,7 +31,10 @@
       *ngFor="let conversation of advices | async"
       [selected]="selectedConversationId === conversation.id"
       (selectConversation)="selectConversation($event)"
-      [routerLink]="[conversation.id]"
+      (click)="setNavigationContext()"
+      [routerLink]="
+        (isMobile$ | async) ? ['mobile', conversation.id] : [conversation.id]
+      "
       [conversation]="conversation"></app-list-item>
   </mat-tab>
 </mat-tab-group>

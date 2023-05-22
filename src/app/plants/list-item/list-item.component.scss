@@ -14,6 +14,10 @@
         background-color: #eee;
     }
 
+    &--mobile {
+        flex-direction: column;
+    }
+
     &__image {
         margin-right: functions.toRem(30);
         align-self: flex-start;
@@ -60,51 +64,64 @@
         justify-content: space-between;
         gap: functions.toRem(80);
 
+        &.buttons--mobile {
+            width: 100%;
+            justify-content: normal;
+            align-self: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .button:hover {
+            cursor: pointer
+        }
+
+        .button--cancel {
+            background-color: variables.$cancel;
+            color: variables.$white;
+            border: none;
+        }
+        .button--purple-light {
+            background-color: variables.$purple-light;
+            color: variables.$white;
+            border: none;
+        }
+        .button--confirm {
+            background-color: variables.$confirm;
+            color: variables.$white;
+            border: none;
+        }
+
+        .button--functional {
+            background-color: transparent;
+            border: none;
+            color: variables.$primary;
+            font-size: functions.toRem(16);
+            font-weight: bold;
+        }
+
         &__group {
             display: flex;
             gap: functions.toRem(30);
-
-            .button--cancel {
-                background-color: variables.$cancel;
-                color: variables.$white;
-                border: none;
-            }
-            .button--purple-light {
-                background-color: variables.$purple-light;
-                color: variables.$white;
-                border: none;
-            }
-            .button--confirm {
-                background-color: variables.$confirm;
-                color: variables.$white;
-                border: none;
-            }
-
         }
 
         &__functional {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
-
-            .button {
-                background-color: transparent;
-                border: none;
-                color: variables.$primary;
-                font-size: functions.toRem(16);
-                font-weight: bold;
-                cursor: default;
-            }
-
-            button:hover {
-                cursor: pointer;
-            }
         }
     }
 
     .row {
         display: flex;
         flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
         gap: 0.5rem;

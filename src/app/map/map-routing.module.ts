@@ -5,12 +5,12 @@ import { MapPageComponent } from './map-page/map-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: MapPageComponent,
-  },
+    component: MapPageComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class MapRoutingModule {}

@@ -6,97 +6,15 @@
       <h4 class="menu__category-title">{{ category.key }}</h4>
       <mat-list-item
         *ngFor="let link of menu[category.key]"
-        [activated]="link.name === activeMenu">
+        [activated]="link.name === activeMenu"
+        [routerLink]="(isMobile$ | async) ? link.link + '-mobile' : link.link"
+        (click)="setNavigationContext()">
         <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
-        <a class="menu__link" matListItemTitle href="#">{{ link.name }}</a>
+        <a class="menu__link" matListItemTitle>
+          {{ link.name }}
+        </a>
       </mat-list-item>
     </mat-nav-list>
   </div>
-
-  <div class="profile-page__content profile" *ngIf="user | async as user">
-    <div class="row">
-      <div class="profile__image">
-        <img [src]="user.imageUrl" alt="" />
-      </div>
-      <h2 class="profile__title">
-        Hello, {{ user.firstName }} {{ user.lastName }}
-      </h2>
-    </div>
-
-    <div class="profile__rating row">
-      <p>Votre note moyenne :</p>
-      <div class="stars">
-        <mat-icon>{{ user.rating >= 1 ? 'star' : 'star_outline' }}</mat-icon>
-        <mat-icon>{{ user.rating >= 2 ? 'star' : 'star_outline' }}</mat-icon>
-        <mat-icon>{{ user.rating >= 3 ? 'star' : 'star_outline' }}</mat-icon>
-        <mat-icon>{{ user.rating >= 4 ? 'star' : 'star_outline' }}</mat-icon>
-        <mat-icon>{{ user.rating >= 5 ? 'star' : 'star_outline' }}</mat-icon>
-      </div>
-    </div>
-
-    <div class="profile__form form">
-      <h3 class="form__title">Mes données</h3>
-      <form [formGroup]="userDataForm" (ngSubmit)="saveUserData()" class="form">
-        <mat-form-field class="login-full-width">
-          <mat-icon matPrefix>person</mat-icon>
-          <mat-label>Nom d'utilisateur</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="username"
-            placeholder="Pseudo" />
-        </mat-form-field>
-        <mat-form-field class="login-full-width">
-          <mat-icon matPrefix>mail</mat-icon>
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            formControlName="email"
-            placeholder="Email"
-            email />
-        </mat-form-field>
-        <button class="form__button" type="submit" mat-raised-button>
-          SAUVEGARDER
-        </button>
-      </form>
-    </div>
-
-    <div class="profile__form form">
-      <h3 class="form__title">Changer le mot de passe</h3>
-      <form
-        [formGroup]="passwordForm"
-        (ngSubmit)="savePassword()"
-        class="form"
-        appValidatePassword>
-        <mat-form-field class="login-full-width">
-          <mat-icon matPrefix>key</mat-icon>
-          <mat-label>Mot de passe</mat-label>
-          <input
-            type="password"
-            matInput
-            formControlName="password"
-            placeholder="Mot de passe" />
-          <mat-error
-            *ngIf="passwordForm.controls['password'].errors?.['minlength']">
-            Minimum 8 caractères
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="login-full-width">
-          <mat-label>Confirmer le mot de passe</mat-label>
-          <input
-            type="password"
-            matInput
-            formControlName="passwordVerify"
-            placeholder="Mot de passe" />
-          <mat-error *ngIf="passwordForm.errors?.['noPasswordMatch']">
-            Les mots de passe ne correspondent pas
-          </mat-error>
-        </mat-form-field>
-        <button class="form__button" type="submit" mat-raised-button>
-          SAUVEGARDER
-        </button>
-      </form>
-    </div>
-  </div>
+  <router-outlet *ngIf="(isMobile$ | async) === false"></router-outlet>
 </div>

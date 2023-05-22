@@ -1,17 +1,14 @@
 @use "variables";
 @use "functions";
 
-
 .profile-page {
   display: flex;
   justify-content: space-evenly;
   align-content: start;
   gap: 0px 0px;
-  grid-template-areas: "menu content content";
   padding-top: functions.toRem(30);
 
   .menu {
-    grid-area: menu;
     margin-bottom: functions.toRem(20);
 
     &__category-title {
@@ -23,48 +20,6 @@
 
     &__link {
       text-decoration: none;
-    }
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
-    .row {
-      display: flex;
-      align-items: center;
-      gap: functions.toRem(20)
-    }
-
-    .profile__image {
-      img {
-        width: 75px;
-        height: 75px;
-        border-radius: 50%;
-        box-shadow: -4px 4px 5px rgba(0, 0, 0, 0.25);
-      }
-    }
-
-    .profile__title {
-      font-weight: 300;
-      font-size: functions.toRem(36);
-    }
-  }
-
-  .form {
-    display: flex;
-    flex-direction: column;
-
-    &__title {
-      font-weight: 300;
-      font-size: functions.toRem(23);
-      margin-bottom: functions.toRem(20);
-    }
-
-    &__button {
-      background-color: variables.$confirm;
-      color: variables.$white;
     }
   }
 }

@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ListItemComponent {
   @Input() listing!: any;
-  isAdditionalInfoHidden = false;
+  isAdditionalInfoHidden = true;
 }

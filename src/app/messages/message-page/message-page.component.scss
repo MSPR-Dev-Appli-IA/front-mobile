@@ -3,13 +3,7 @@
 
 .message-page {
   height: 100%;
-  display: grid;
-  grid-template-columns: 0.5fr 3fr;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "list messages";
+  display: flex;
 
   &__placeholder {
     display: flex;
@@ -30,29 +24,12 @@
 }
 
 .list {
-  grid-area: list;
+  flex: 1 2 35%;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.messages {
-  grid-area: messages;
-
-  &__button-bar {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    gap: functions.toRem(10);
-    height: functions.toRem(56);
-    padding: 0 functions.toRem(20);
-
-    button, mat-icon {
-      border-color: variables.$purple;
-    }
-  }
-
-  &__window {
-    height: 100%;
-  }
+.window {
+  flex: 1 1 65%;
 }
 
 
