@@ -1,7 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from '@angular/cdk/layout';
+import { map, Observable, Subscription } from 'rxjs';
 import { MapService } from '../map.service';
 
 @Component({
@@ -10,14 +14,20 @@ import { MapService } from '../map.service';
   styleUrls: ['./map-page.component.scss']
 })
 export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  isMobile$: Observable<boolean>;
   map!: mapboxgl.Map;
   listings = [];
+  isViewMap = true;
 
   breakpointSubscription = new Subscription();
   constructor(
     private responsive: BreakpointObserver,
     private mapService: MapService
-  ) {}
+  ) {
+    this.isMobile$ = this.responsive
+      .observe(Breakpoints.HandsetPortrait)
+      .pipe(map((result: BreakpointState): boolean => result.matches));
+  }
 
   ngOnInit() {
     this.map = this.mapService.init();

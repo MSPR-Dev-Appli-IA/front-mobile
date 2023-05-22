@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Conversation, MessageService } from '../message.service';
 import { Router } from '@angular/router';
+import { LayoutService } from '../../layout/layout.service';
 
 @Component({
   selector: 'app-message-list',
@@ -15,10 +16,15 @@ export class MessageListComponent {
   messages: Observable<Conversation[]>;
   demands: Observable<Conversation[]>;
   advices: Observable<Conversation[]>;
+  isMobile$: Observable<boolean> = this.layoutService.isMobile$;
 
   selectedConversationId = -1;
 
-  constructor(private messageService: MessageService, private router: Router) {
+  constructor(
+    private messageService: MessageService,
+    private router: Router,
+    private layoutService: LayoutService
+  ) {
     this.allConversations = this.messageService.getConversations();
 
     this.messages = this.allConversations.pipe(
@@ -52,5 +58,9 @@ export class MessageListComponent {
 
   selectConversation(id: number) {
     this.selectedConversationId = id;
+  }
+
+  setNavigationContext(): void {
+    this.layoutService.setMobileNavigationContext('messages');
   }
 }

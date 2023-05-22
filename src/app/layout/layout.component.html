@@ -1,14 +1,34 @@
 <ng-container *ngIf="isMobile$ | async; else desktop">
   <div class="mobile-layout">
+    <mat-toolbar>
+      <button
+        mat-icon-button
+        aria-label="Go back"
+        (click)="goBack()"
+        *ngIf="isBackArrowVisible | async; else logo">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <ng-template #logo>
+        <a class="nav__logo" routerLink="">
+          <img
+            ngSrc="assets/img/logo.svg"
+            class="logo-image"
+            alt="logo"
+            height="44"
+            width="35" />
+        </a>
+      </ng-template>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Rechercher" />
+      </mat-form-field>
+      <mat-icon>search</mat-icon>
+    </mat-toolbar>
     <div class="mobile-layout__content">
       <router-outlet></router-outlet>
     </div>
     <mat-button-toggle-group [value]="path">
-      <mat-button-toggle
-        aria-label="Carte"
-        value="map"
-        (click)="navigate('map')">
-        <mat-icon>map</mat-icon>
+      <mat-button-toggle aria-label="Home" value="" (click)="navigate('')">
+        <mat-icon>home</mat-icon>
       </mat-button-toggle>
       <mat-button-toggle
         aria-label="Mes plantes"
@@ -34,7 +54,7 @@
 <ng-template #desktop>
   <div class="desktop-layout">
     <nav class="nav">
-      <a class="nav__logo" routerLink="map">
+      <a class="nav__logo" routerLink="">
         <img
           ngSrc="assets/img/logo.svg"
           class="logo-image"

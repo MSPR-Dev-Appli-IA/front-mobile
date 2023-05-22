@@ -4,13 +4,23 @@ import { shareReplay, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
 import { baseApiUrl } from 'mapbox-gl';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user: any;
-  constructor(private http: HttpClient) {}
+  user: User = {
+    rating: 4,
+    imageUrl: '',
+    firstName: '',
+    lastName: '',
+    role: '',
+    username: '',
+    email: ''
+  };
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string) {
     return this.http
@@ -21,23 +31,22 @@ export class AuthService {
       )
       .pipe(
         map((res: any) => {
-          this.user = {
-            ...res,
-            imageUrl: '',
-            email: res.local.email,
-            role: ''
-          };
-          return this.setSession(res);
+          console.log(res);
+          if ('jwt' in res && res.jwt !== '') {
+            this.router.navigate(['/']);
+            return this.setSession(res);
+          } else {
+            return new Error('Invalid credentials');
+          }
         }),
         shareReplay()
       );
   }
 
   private setSession(authResult: any) {
-    //   console.log(authResult);
-    //   const expiresAt = moment().add(authResult.expiresIn, 'second');
-    //   sessionStorage.setItem('id_token', authResult.idToken);
-    //   sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    const expiresAt = moment().add(authResult.expiresIn, 'second');
+    sessionStorage.setItem('id_token', authResult.jwt);
+    sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
   logout() {
@@ -45,9 +54,12 @@ export class AuthService {
     sessionStorage.removeItem('expires_at');
   }
 
-  public isLoggedIn() {
+  public isLoggedIn(): Observable<boolean> {
     return this.http
       .get<boolean>(environment.apiUrl + 'auth/me', {
+        headers: {
+          Authorization: 'Bearer ' + this.getToken()
+        },
         withCredentials: true
       })
       .pipe(
@@ -58,7 +70,7 @@ export class AuthService {
       );
   }
 
-  isLoggedOut() {
+  isLoggedOut(): boolean {
     return !this.isLoggedIn();
   }
 
@@ -68,9 +80,13 @@ export class AuthService {
     return moment(expiresAt);
   }
 
+  getToken() {
+    return localStorage.getItem('id_token');
+  }
+
   register(user: any) {
     return this.http
-      .post<User>(environment.apiUrl + 'auth/signup', user, {
+      .post<User>(environment.apiUrl + 'auth/register', user, {
         withCredentials: true
       })
       .pipe(
@@ -81,7 +97,6 @@ export class AuthService {
 }
 
 export interface User {
-  id: number;
   rating: number;
   imageUrl: string;
   firstName: string;
@@ -89,7 +104,6 @@ export interface User {
   role: string;
   username: string;
   email: string;
-  password?: string;
 }
 
 export enum Role {

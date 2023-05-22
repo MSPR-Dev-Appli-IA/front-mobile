@@ -1,61 +1,44 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { KeyValue } from '@angular/common';
-import { ProfileService } from '../profile.service';
-import { User } from '../../auth/auth.service';
-import { Observable, Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first, Observable } from 'rxjs';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+import { LayoutService } from '../../layout/layout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent implements OnDestroy {
+export class ProfilePageComponent {
   readonly menu: { [key: string]: MenuItem[] } = {
     GENERAL: [
-      { name: 'Profile', icon: 'person' },
-      { name: 'Notifications', icon: 'notifications' },
-      { name: 'Securité', icon: 'lock' }
+      { name: 'Profile', icon: 'person', link: 'general' },
+      { name: 'Notifications', icon: 'notifications', link: 'notifications' },
+      { name: 'Securité', icon: 'lock', link: 'security' }
     ],
     AIDE: [
-      { name: 'Tutoriel 1', icon: 'help' },
-      { name: 'Tutoriel 2', icon: 'info' },
-      { name: 'Tutoriel 3', icon: 'info' }
+      { name: 'Tutoriel 1', icon: 'help', link: 'tuto-1' },
+      { name: 'Tutoriel 2', icon: 'info', link: 'tuto-2' },
+      { name: 'Tutoriel 3', icon: 'info', link: 'tuto-3' }
     ]
   };
   activeMenu = 'Profile';
-  user: Observable<User>;
-  userDataForm!: FormGroup;
-  passwordForm!: FormGroup;
-  sub = new Subscription();
+  isMobile$: Observable<boolean>;
 
-  constructor(private profileService: ProfileService, private fb: FormBuilder) {
-    this.user = profileService.getUser();
-    this.userDataForm = this.fb.group({
-      username: ['', Validators.pattern(/^[a-zA-Z0-9_-]+$/)],
-      email: ['', Validators.email]
+  constructor(private layoutService: LayoutService, private router: Router) {
+    this.isMobile$ = this.layoutService.isMobile$;
+
+    this.isMobile$.pipe(first()).subscribe((isMobile: boolean) => {
+      if (!isMobile) {
+        this.router.navigate(['profile/general']);
+      }
     });
-    this.passwordForm = this.fb.group({
-      password: ['', [Validators.minLength(8)]],
-      passwordVerify: ['']
-    });
-
-    this.sub.add(
-      this.user.subscribe(user => {
-        this.userDataForm.setValue({
-          username: user.username,
-          email: user.email
-        });
-      })
-    );
-  }
-
-  saveUserData() {
-    console.log('saveUserData');
-  }
-
-  savePassword() {
-    console.log('savePassword');
   }
 
   originalOrder = (
@@ -65,12 +48,13 @@ export class ProfilePageComponent implements OnDestroy {
     return 0;
   };
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+  setNavigationContext(): void {
+    this.layoutService.setMobileNavigationContext('profile');
   }
 }
 
 export interface MenuItem {
   name: string;
   icon: string;
+  link: string;
 }

@@ -22,4 +22,26 @@
       width: 100%;
     }
   }
+
+  .hidden {
+    display: none;
+  }
+
+  &__toggle {
+    position: absolute;
+    bottom: functions.toRem(70);
+    left: 40%;
+    border: 1px solid variables.$primary;
+    border-radius: functions.toRem(6);
+
+    .active {
+      background: variables.$primary;
+      color: variables.$white;
+    }
+
+    .not-active {
+        background-color: variables.$white;
+        color: variables.$primary;
+    }
+  }
 }

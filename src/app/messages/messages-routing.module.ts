@@ -13,6 +13,10 @@ const routes: Routes = [
         component: MessageWindowComponent
       }
     ]
+  },
+  {
+    path: 'mobile/:id',
+    component: MessageWindowComponent
   }
 ];
 

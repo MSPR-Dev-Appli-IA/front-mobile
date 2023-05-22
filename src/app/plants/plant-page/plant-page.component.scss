@@ -5,9 +5,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: functions.toRem(40);
 
   mat-form-field {
+    margin-top: functions.toRem(40);
     width: 50%;
     background-color: transparent;
   }
@@ -25,5 +25,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+  }
+
+  @media(max-width: 768px) {
+    .add-button {
+      width: functions.toRem(60);
+      height: functions.toRem(60);
+      bottom: functions.toRem(55);
+      right: functions.toRem(20);
+    }
   }
 }

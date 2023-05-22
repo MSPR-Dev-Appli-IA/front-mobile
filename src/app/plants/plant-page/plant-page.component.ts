@@ -4,6 +4,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AddEditPlantModalComponent } from '../add-edit-plant-modal/add-edit-plant-modal.component';
 import { Dialog } from '@angular/cdk/dialog';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-plant-page',
@@ -12,8 +17,17 @@ import { Dialog } from '@angular/cdk/dialog';
 })
 export class PlantPageComponent implements OnInit {
   plants: Observable<Plant[]> | undefined;
+  isMobile$: Observable<boolean>;
 
-  constructor(private service: UserPlantsService, public dialog: Dialog) {}
+  constructor(
+    private service: UserPlantsService,
+    public dialog: Dialog,
+    private responsive: BreakpointObserver
+  ) {
+    this.isMobile$ = this.responsive
+      .observe(Breakpoints.HandsetPortrait)
+      .pipe(map((result: BreakpointState): boolean => result.matches));
+  }
 
   ngOnInit() {
     this.plants = this.service.getPlants();

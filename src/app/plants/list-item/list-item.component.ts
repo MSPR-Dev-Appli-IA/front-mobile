@@ -3,6 +3,7 @@ import { Plant, UserPlantsService } from '../plants.service';
 import { Router } from '@angular/router';
 import { AddEditPlantModalComponent } from '../add-edit-plant-modal/add-edit-plant-modal.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { LayoutService } from '../../layout/layout.service';
 
 @Component({
   selector: 'app-list-item',
@@ -12,10 +13,13 @@ import { Dialog } from '@angular/cdk/dialog';
 export class ListItemComponent {
   @Input() plant!: Plant;
   isOpen = false;
+  isMobile$ = this.layoutService.isMobile$;
+
   constructor(
     private service: UserPlantsService,
     private router: Router,
-    public dialog: Dialog
+    public dialog: Dialog,
+    private layoutService: LayoutService
   ) {}
 
   askForAdvice(): void {
