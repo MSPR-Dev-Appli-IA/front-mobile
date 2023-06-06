@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from "@angular/cdk/layout";
-import { map, Observable } from "rxjs";
-import { ActivatedRoute, Router } from "@angular/router";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LayoutService } from './layout.service';
 
 @Component({
   selector: 'app-layout',
@@ -10,18 +10,26 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class LayoutComponent {
   isMobile$: Observable<boolean>;
-  path = 'map'
+  path = '';
+  isBackArrowVisible: BehaviorSubject<boolean>;
 
-  constructor(private responsive: BreakpointObserver, private router: Router, private route: ActivatedRoute) {
-    this.isMobile$ = this.responsive.observe(Breakpoints.HandsetPortrait).pipe(
-        map(
-            result => result.matches ? true : false
-        )
-    );
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private layoutService: LayoutService
+  ) {
+    this.isMobile$ = this.layoutService.isMobile$;
+    this.isBackArrowVisible = this.layoutService.isBackArrowVisible;
   }
 
   navigate(path: string): void {
     this.path = path;
-    this.router.navigate([path], { relativeTo: this.route });
+    this.router.navigate([path]);
+    this.layoutService.resetMobileNavigationContext();
+  }
+
+  goBack(): void {
+    this.layoutService.goBack();
+    this.layoutService.hideBackArrow();
   }
 }

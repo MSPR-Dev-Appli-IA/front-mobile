@@ -1,0 +1,22 @@
+<div class="profile-page">
+  <div class="profile-page__menu">
+    <mat-nav-list
+      class="menu"
+      *ngFor="let category of menu | keyvalue : originalOrder">
+      <h4 class="menu__category-title">{{ category.key }}</h4>
+      <mat-list-item
+        *ngFor="let link of menu[category.key]"
+        [activated]="link.name === activeMenu"
+        [routerLink]="(isMobile$ | async) ? link.link + '-mobile' : link.link"
+        (click)="setNavigationContext()">
+        <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
+        <a class="menu__link" matListItemTitle>
+          {{ link.name }}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+  <div class="profile-page__content" *ngIf="(isMobile$ | async) === false">
+    <router-outlet></router-outlet>
+  </div>
+</div>

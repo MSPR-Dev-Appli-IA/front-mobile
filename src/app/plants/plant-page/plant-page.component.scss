@@ -1,0 +1,39 @@
+@use "variables";
+@use "functions";
+
+.plant-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  mat-form-field {
+    margin-top: functions.toRem(40);
+    width: 50%;
+    background-color: transparent;
+  }
+
+  .add-button {
+    border: none;
+    border-radius: 50%;
+    width: functions.toRem(70);
+    height: functions.toRem(70);
+    background-color: variables.$primary;
+    color: variables.$white;
+    position: fixed;
+    bottom: functions.toRem(20);
+    right: functions.toRem(20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  @media(max-width: 768px) {
+    .add-button {
+      width: functions.toRem(60);
+      height: functions.toRem(60);
+      bottom: functions.toRem(55);
+      right: functions.toRem(20);
+    }
+  }
+}

@@ -1,0 +1,73 @@
+@use "functions";
+@use "variables";
+
+@media(hover: hover) and (pointer: coarse) {
+  .conversation:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.conversation {
+  display: flex;
+  padding: functions.toRem(25) 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  gap: functions.toRem(10);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  &.--selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .circle {
+    border: functions.toRem(1) solid variables.$black;
+    margin: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+    height: 50px;
+    background-color: variables.$white;
+
+    .circle-inner {
+      color: variables.$primary-light;
+      text-decoration: none;
+      font-size: 15px;
+    }
+  }
+
+  &__content {
+    font-size: functions.toRem(20);
+  }
+
+  &__sender-name {
+    font-size: functions.toRem(16);
+  }
+
+  &__hour {
+    font-size: functions.toRem(14);
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .markers {
+    padding: 0 10px 0 0;
+    &__favorite {
+      color: variables.$yellow;
+    }
+
+    &__unread {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: variables.$cancel;
+      color: variables.$white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

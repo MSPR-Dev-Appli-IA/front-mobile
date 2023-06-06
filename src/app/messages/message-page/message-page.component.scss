@@ -1,0 +1,36 @@
+@use "variables";
+@use "functions";
+
+.message-page {
+  height: 100%;
+  display: flex;
+
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+    padding: functions.toRem(80);
+    font-size: functions.toRem(30);
+
+    mat-icon {
+      align-self: flex-start;
+      font-size: functions.toRem(50);
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+}
+
+.list {
+  max-width: functions.toRem(500);
+  flex: 1 2 35%;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.window {
+  flex: 1 1 65%;
+}
+
+

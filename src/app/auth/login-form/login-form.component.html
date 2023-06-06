@@ -1,14 +1,22 @@
-<form class="login-form" (ngSubmit)="login()">
-    <mat-form-field class="login-full-width">
-        <mat-icon matPrefix>person</mat-icon>
-        <mat-label>Nom d'utilisateur</mat-label>
-        <input type="text" matInput placeholder="Nom d'utilisateur">
-    </mat-form-field>
-    <mat-form-field class="login-full-width">
-        <mat-icon matPrefix>key</mat-icon>
-        <mat-label>Mot de passe</mat-label>
-        <input type="password" matInput placeholder="Mot de passe">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">SE CONNECTER</button>
+<form [formGroup]="form" class="login-form" (ngSubmit)="login()">
+  <mat-form-field class="login-full-width">
+    <mat-icon matPrefix>mail</mat-icon>
+    <mat-label>Email</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="email"
+      placeholder="Email"
+      email />
+  </mat-form-field>
+  <mat-form-field class="login-full-width">
+    <mat-icon matPrefix>key</mat-icon>
+    <mat-label>Mot de passe</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="password"
+      placeholder="Mot de passe" />
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">SE CONNECTER</button>
 </form>
-

@@ -1,1 +1,32 @@
-<p>map works!</p>
+<div class="map-page">
+  <div class="map-page__list" [class.hidden]="isViewMap && (isMobile$ | async)">
+    <mat-form-field *ngIf="(isMobile$ | async) !== true">
+      <mat-icon matIconPrefix>search</mat-icon>
+      <input
+        matInput
+        type="text"
+        placeholder="Recherchez des plantes autour de vous" />
+    </mat-form-field>
+    <app-list-item
+      *ngFor="let listing of listings | async"
+      [listing]="listing"></app-list-item>
+  </div>
+  <div
+    id="map"
+    class="match-parent map-page__map"
+    [class.hidden]="!isViewMap && (isMobile$ | async)"></div>
+  <div *ngIf="isMobile$ | async" class="map-page__toggle row">
+    <button
+      [ngClass]="isViewMap ? 'active' : 'not-active'"
+      (click)="isViewMap = true"
+      mat-button>
+      <mat-icon>map</mat-icon>
+    </button>
+    <button
+      [ngClass]="!isViewMap ? 'active' : 'not-active'"
+      (click)="isViewMap = false"
+      mat-button>
+      <mat-icon>list</mat-icon>
+    </button>
+  </div>
+</div>

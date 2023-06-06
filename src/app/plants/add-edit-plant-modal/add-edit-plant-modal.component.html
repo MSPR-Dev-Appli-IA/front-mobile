@@ -1,0 +1,68 @@
+<div class="add-edit-modal">
+  <div class="add-edit-modal__content">
+    <div class="add-edit-modal__header">
+      <h4>{{ editMode ? 'Modifier une plante' : 'Ajouter une plante' }}</h4>
+      <button
+        type="button"
+        class="transparent"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin">
+        <mat-icon (click)="dialogRef.close()">close</mat-icon>
+      </button>
+    </div>
+
+    <mat-form-field class="login-full-width">
+      <mat-icon matPrefix>forest</mat-icon>
+      <mat-label>Nom</mat-label>
+      <input type="text" matInput placeholder="Name" [(ngModel)]="plant.name" />
+    </mat-form-field>
+    <mat-form-field class="login-full-width">
+      <mat-icon matPrefix>subject</mat-icon>
+      <mat-label>Description</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Description"
+        [(ngModel)]="plant.description" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Espèce</mat-label>
+      <mat-select [value]="plant.species?.id" (change)="saveSpecies($event)">
+        <mat-option
+          *ngFor="let speciesItem of species | async"
+          [value]="speciesItem.id">
+          {{ speciesItem.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="add-edit-modal__header">
+      <h5>Images</h5>
+      <button
+        type="button"
+        class="transparent"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin">
+        <mat-icon (click)="addImageInput()">add</mat-icon>
+      </button>
+    </div>
+    <div
+      *ngFor="let url of plant.imageUrls; let index = index"
+      class="add-edit-modal__input">
+      <mat-form-field class="login-full-width">
+        <mat-icon matPrefix>image</mat-icon>
+        <mat-label>Image URL</mat-label>
+        <input type="text" matInput placeholder="Image" [value]="url" />
+      </mat-form-field>
+      <button class="transparent">
+        <mat-icon (click)="removeImageInput(index)">delete</mat-icon>
+      </button>
+    </div>
+    <button
+      type="button"
+      mat-raised-button
+      class="button--confirm"
+      (click)="savePlant()">
+      SAUVEGARDER
+    </button>
+  </div>
+</div>

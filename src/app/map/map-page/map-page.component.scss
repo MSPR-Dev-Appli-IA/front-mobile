@@ -1,0 +1,51 @@
+@use "variables";
+@use "functions";
+@use "shared";
+
+.match-parent {
+  width: 100%;
+  height: 100%;
+}
+
+.map-page {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+
+  &___map {
+    flex: 1 1 60%;
+    height: 100%;
+  }
+
+  &__list {
+    flex: 1 1 40%;
+    max-width: functions.toRem(400);
+    overflow-y: auto;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  &__toggle {
+    position: absolute;
+    bottom: functions.toRem(70);
+    left: 40%;
+    border: 1px solid variables.$primary;
+    border-radius: functions.toRem(6);
+
+    .active {
+      background: variables.$primary;
+      color: variables.$white;
+    }
+
+    .not-active {
+        background-color: variables.$white;
+        color: variables.$primary;
+    }
+  }
+}

@@ -1,0 +1,140 @@
+@use "variables";
+@use "functions";
+
+.list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: functions.toRem(20);
+    border-bottom: 1px solid #ccc;
+    max-width: functions.toRem(700);
+
+    &:hover {
+        background-color: #eee;
+    }
+
+    &>.row {
+        width: 100%;
+    }
+
+    &--mobile {
+        flex-direction: column;
+    }
+
+    &__image {
+        margin-right: functions.toRem(30);
+        align-self: flex-start;
+        border-radius: functions.toRem(10);
+        min-width: 100px;
+        object-fit: cover;
+    }
+
+    &__content {
+        flex: 1;
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: functions.toRem(15);
+        width: 100%;
+
+        &>.row {
+            width: 100%;
+        }
+    }
+
+    &__title {
+        font-weight: normal;
+        font-size: functions.toRem(36);
+    }
+
+    &__latin {
+        font-weight: lighter;
+        font-style: italic;
+        font-size: functions.toRem(5);
+    }
+
+    &__property {
+        font-weight: normal;
+        font-size: functions.toRem(16);
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: functions.toRem(80);
+
+        button {
+            //margin-right: functions.toRem(15);
+            //margin-bottom: functions.toRem(15);
+        }
+
+        &.buttons--mobile {
+            width: 100%;
+            justify-content: normal;
+            align-self: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .button:hover {
+            cursor: pointer
+        }
+
+        .button--cancel {
+            background-color: variables.$cancel;
+            color: variables.$white;
+            border: none;
+        }
+        .button--purple-light {
+            background-color: variables.$purple-light;
+            color: variables.$white;
+            border: none;
+        }
+        .button--confirm {
+            background-color: variables.$confirm;
+            color: variables.$white;
+            border: none;
+        }
+
+        .button--functional {
+            background-color: transparent;
+            border: none;
+            color: variables.$primary;
+            font-size: functions.toRem(16);
+            font-weight: bold;
+        }
+
+        &__group {
+            display: flex;
+            gap: functions.toRem(30);
+        }
+
+        &__functional {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+}
+

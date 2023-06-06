@@ -1,0 +1,21 @@
+<div class="message-page">
+  <div class="list">
+    <app-message-list></app-message-list>
+  </div>
+  <ng-template [ngIf]="(isMobile$ | async) === false">
+    <div *ngIf="selectedConversationId > 0; else placeholder" class="window">
+      <router-outlet></router-outlet>
+    </div>
+    <ng-template #placeholder>
+      <div class="message-page__placeholder">
+        <mat-icon>chat</mat-icon>
+        <div>
+          <h2>Selectionnez une conversation</h2>
+          <p>
+            Vous pouvez selectionner une conversation dans la liste de gauche
+          </p>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

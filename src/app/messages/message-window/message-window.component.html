@@ -1,0 +1,59 @@
+<div *ngIf="conversationId | async" class="messages">
+  <div class="messages__button-bar">
+    <button mat-stroked-button>
+      <mat-icon>how_to_reg</mat-icon>
+      VALIDER L'ECHANGE
+    </button>
+    <button mat-stroked-button>
+      <mat-icon>stars</mat-icon>
+      METTRE EN FAVORIS
+    </button>
+  </div>
+  <div
+    *ngIf="messages | async as messages"
+    class="messages__window message-window">
+    <div
+      *ngIf="messages.length > 0; else placeholder"
+      class="message-window__content">
+      <div
+        *ngFor="let message of messages"
+        class="message-container"
+        [class.--current-user]="message.sender_id === currentUserId"
+        [class.--other-user]="message.sender_id !== currentUserId">
+        <div *ngIf="message.sender_id !== currentUserId" class="circle">
+          <span
+            *ngIf="conversation | async as conversation; else iconPlaceholder">
+            {{
+              conversation.sender_name[0] +
+                conversation.sender_name.split(' ')[1][0]
+            }}
+          </span>
+          <ng-template #iconPlaceholder>
+            <mat-icon>person</mat-icon>
+          </ng-template>
+        </div>
+        <div class="message">
+          <span>{{ message.content }}</span>
+        </div>
+        <div *ngIf="message.sender_id === currentUserId" class="circle">
+          <span>MOI</span>
+        </div>
+      </div>
+    </div>
+    <ng-template #placeholder>
+      <div class="message-window__placeholder">
+        <div>Commencer la conversation</div>
+      </div>
+    </ng-template>
+    <div class="message-window__input">
+      <mat-form-field class="input">
+        <mat-icon matPrefix (click)="sendImage()">image</mat-icon>
+        <input
+          matInput
+          type="text"
+          placeholder="Taper votre message"
+          [value]="input" />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

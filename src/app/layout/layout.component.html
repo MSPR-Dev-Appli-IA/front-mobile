@@ -1,38 +1,82 @@
 <ng-container *ngIf="isMobile$ | async; else desktop">
-    <div class="mobile-layout">
-        <div class="mobile-layout__content">
-            <router-outlet></router-outlet>
-        </div>
-        <mat-button-toggle-group [value]="path">
-            <mat-button-toggle aria-label="Carte" value="map" (click)="navigate('map')">
-                <mat-icon>map</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle aria-label="Mes plantes" value="plants" (click)="navigate('plants')">
-                <mat-icon>forest</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle aria-label="Messages" value="messages" (click)="navigate('messages')">
-                <mat-icon>message</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle aria-label="Profile" value="profile" (click)="navigate('profile')">
-                <mat-icon>person</mat-icon>
-            </mat-button-toggle>
-        </mat-button-toggle-group>
+  <div class="mobile-layout">
+    <mat-toolbar>
+      <button
+        mat-icon-button
+        aria-label="Go back"
+        (click)="goBack()"
+        *ngIf="isBackArrowVisible | async; else logo">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <ng-template #logo>
+        <a class="nav__logo" routerLink="">
+          <img
+            ngSrc="assets/img/logo.svg"
+            class="logo-image"
+            alt="logo"
+            height="44"
+            width="35" />
+        </a>
+      </ng-template>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Rechercher" />
+      </mat-form-field>
+      <mat-icon>search</mat-icon>
+    </mat-toolbar>
+    <div class="mobile-layout__content">
+      <router-outlet></router-outlet>
     </div>
+    <mat-button-toggle-group [value]="path">
+      <mat-button-toggle aria-label="Home" value="" (click)="navigate('')">
+        <mat-icon>home</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle
+        aria-label="Mes plantes"
+        value="plants"
+        (click)="navigate('plants')">
+        <mat-icon>forest</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle
+        aria-label="Messages"
+        value="messages"
+        (click)="navigate('messages')">
+        <mat-icon>message</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle
+        aria-label="Profile"
+        value="profile"
+        (click)="navigate('profile')">
+        <mat-icon>person</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
 </ng-container>
 <ng-template #desktop>
-    <nav>
-        <div class="logo"></div>
-        <ul>
-            <li>
-               Mes plantes
-            </li>
-            <li>
-                Messages
-            </li>
-            <li>
-                Profile
-            </li>
-        </ul>
+  <div class="desktop-layout">
+    <nav class="nav">
+      <a class="nav__logo" routerLink="">
+        <img
+          ngSrc="assets/img/logo.svg"
+          class="logo-image"
+          alt="logo"
+          height="60"
+          width="48" />
+        <span class="logo-text">A'rosa-je</span>
+      </a>
+      <ul class="nav__links">
+        <li>
+          <a routerLink="plants">Mes plantes</a>
+        </li>
+        <li>
+          <a routerLink="messages">Messages</a>
+        </li>
+        <li>
+          <a routerLink="profile">Profile</a>
+        </li>
+      </ul>
     </nav>
-    <router-outlet></router-outlet>
+    <div class="desktop-layout__content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </ng-template>

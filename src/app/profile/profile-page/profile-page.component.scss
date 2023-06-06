@@ -1,0 +1,25 @@
+@use "variables";
+@use "functions";
+
+.profile-page {
+  display: flex;
+  align-content: start;
+  justify-content: space-evenly;
+  gap: 0px 0px;
+  padding-top: functions.toRem(30);
+
+  .menu {
+    margin-bottom: functions.toRem(20);
+
+    &__category-title {
+      font-weight: bolder;
+      font-size: functions.toRem(16);
+      color: rgba(variables.$black, 0.5);
+      margin-bottom: functions.toRem(8);
+    }
+
+    &__link {
+      text-decoration: none;
+    }
+  }
+}
