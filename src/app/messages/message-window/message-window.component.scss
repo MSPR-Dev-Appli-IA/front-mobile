@@ -27,6 +27,10 @@
   flex-direction: column;
   justify-content: space-between;
 
+  @media (max-width: 768px) {
+    padding: functions.toRem(30) functions.toRem(20);
+  }
+
   &__content {
     width: 100%;
     display: flex;

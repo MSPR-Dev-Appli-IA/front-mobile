@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { geojson } from './map-page/map-source';
 import { environment } from '../../environments/environment';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MapService {
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -18,7 +19,7 @@ export class MapService {
       container: 'map',
       style: this.style,
       zoom: 13,
-      center: [this.lng, this.lat],
+      center: [this.lng, this.lat]
     });
   }
 
@@ -47,9 +48,67 @@ export class MapService {
           'text-field': ['get', 'title'],
           'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
           'text-offset': [0, 1.25],
-          'text-anchor': 'top',
-        },
+          'text-anchor': 'top'
+        }
       });
     });
   }
+
+  getListings(): Observable<Listing[]> {
+    return of(LISTINGS);
+  }
+}
+
+const LISTINGS = [
+  {
+    id: 1,
+    title: 'Yucca gloriosa',
+    date: '5 juin - 12 septembre',
+    district: 'Chartrons',
+    sun_exposure: 'Haute',
+    water_needs: '2 fois / jour',
+    temperature: '20°C',
+    image_url: 'yucca.jpg'
+  },
+  {
+    id: 2,
+    title: 'Bégonia',
+    date: '12 juillet - 10 août',
+    district: 'Saint-Michel',
+    sun_exposure: 'Moyenne',
+    water_needs: '4 fois / semaine',
+    temperature: '20°C',
+    image_url: 'begonia.jpg'
+  },
+  {
+    id: 3,
+    title: 'Hibiscus',
+    date: '7 août - 12 août',
+    district: 'La Bastide',
+    sun_exposure: 'Moyenne',
+    water_needs: '1 fois / jour',
+    temperature: '20°C',
+    image_url: 'hibiscus.jpg'
+  },
+  {
+    id: 4,
+    title: 'Monstera',
+    date: '7 août - 12 août',
+    district: 'Caudéran',
+    sun_exposure: 'Bas',
+    water_needs: '3 fois / jour',
+    temperature: '25°C',
+    image_url: 'monstera.jpg'
+  }
+];
+
+export interface Listing {
+  id: number;
+  title: string;
+  date: string;
+  district: string;
+  sun_exposure: string;
+  water_needs: string;
+  temperature: string;
+  image_url: string;
 }

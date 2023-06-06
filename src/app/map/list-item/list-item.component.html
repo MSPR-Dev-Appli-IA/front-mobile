@@ -1,23 +1,23 @@
 <div class="listing">
   <div class="row">
     <div class="listing__image">
-      <img src="assets/img/mock/plant.png" alt="plant image" />
+      <img [src]="'assets/img/mock/' + listing.image_url" alt="plant image" />
     </div>
     <div class="column listing__info">
       <span class="listing__location">
         <mat-icon>location_on</mat-icon>
-        Quartier XYZ
+        {{ listing.district }}
       </span>
-      <span listing__name>Ficus Robusta</span>
-      <span>12 mars- 12 decembre</span>
+      <span listing__name>{{ listing.title }}</span>
+      <span>{{ listing.date }}</span>
     </div>
   </div>
   <div class="column listing__info" [class.hidden]="isAdditionalInfoHidden">
-    <span>Exposition au soleil : Moyenne</span>
-    <span>Arrosage : 2 fois / jour</span>
-    <span>Température Optimale : 25°C</span>
+    <span>Exposition au soleil : {{ listing.sun_exposure }}</span>
+    <span>Arrosage : {{ listing.water_needs }}</span>
+    <span>Température Optimale : {{ listing.temperature }}</span>
     <button class="listing__button" color="" mat-raised-button>
-      FAIRE DEMANDE POUR S'OCCUPER
+      S'EN OCCUPER
     </button>
   </div>
   <button

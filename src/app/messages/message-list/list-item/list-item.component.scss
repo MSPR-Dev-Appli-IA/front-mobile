@@ -1,6 +1,12 @@
 @use "functions";
 @use "variables";
 
+@media(hover: hover) and (pointer: coarse) {
+  .conversation:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
 .conversation {
   display: flex;
   padding: functions.toRem(25) 0;

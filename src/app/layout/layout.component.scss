@@ -4,6 +4,7 @@
 .mobile-layout {
   display: flex;
   flex-direction: column;
+  //padding-top: functions.toRem(68);
   height: 100%;
 
   mat-toolbar {
@@ -13,6 +14,15 @@
     display: flex;
     align-items: center;
     gap: functions.toRem(10);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    a.nav__logo {
+      display: block;
+      width: functions.toRem(61);
+    }
   }
 
   mat-form-field {
@@ -31,7 +41,7 @@
 
   &__content {
     flex: 1 0 auto;
-    overflow: scroll;
+    padding-bottom: functions.toRem(48);
   }
 
   mat-button-toggle-group {
@@ -41,6 +51,9 @@
     border-left: none;
     border-right: none;
     width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
   }
 
   mat-button-toggle {

@@ -24,6 +24,7 @@
 }
 
 .list {
+  max-width: functions.toRem(500);
   flex: 1 2 35%;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }

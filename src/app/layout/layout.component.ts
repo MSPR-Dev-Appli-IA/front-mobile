@@ -10,7 +10,7 @@ import { LayoutService } from './layout.service';
 })
 export class LayoutComponent {
   isMobile$: Observable<boolean>;
-  path = 'map';
+  path = '';
   isBackArrowVisible: BehaviorSubject<boolean>;
 
   constructor(
@@ -25,6 +25,7 @@ export class LayoutComponent {
   navigate(path: string): void {
     this.path = path;
     this.router.navigate([path]);
+    this.layoutService.resetMobileNavigationContext();
   }
 
   goBack(): void {

@@ -2,10 +2,14 @@
   <div class="map-page__list" [class.hidden]="isViewMap && (isMobile$ | async)">
     <mat-form-field *ngIf="(isMobile$ | async) !== true">
       <mat-icon matIconPrefix>search</mat-icon>
-      <input matInput type="text" />
+      <input
+        matInput
+        type="text"
+        placeholder="Recherchez des plantes autour de vous" />
     </mat-form-field>
-    <!--    <app-list-item *ngFor="let listing of listings" [listing]='listing'></app-list-item>-->
-    <app-list-item></app-list-item>
+    <app-list-item
+      *ngFor="let listing of listings | async"
+      [listing]="listing"></app-list-item>
   </div>
   <div
     id="map"
