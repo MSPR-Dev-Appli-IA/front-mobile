@@ -19,7 +19,7 @@
     height: functions.toRem(70);
     background-color: variables.$primary;
     color: variables.$white;
-    position: absolute;
+    position: fixed;
     bottom: functions.toRem(20);
     right: functions.toRem(20);
     display: flex;

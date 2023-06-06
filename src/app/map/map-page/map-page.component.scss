@@ -10,6 +10,7 @@
 .map-page {
   height: 100%;
   display: flex;
+  overflow: hidden;
 
   &___map {
     flex: 1 1 60%;
@@ -18,6 +19,9 @@
 
   &__list {
     flex: 1 1 40%;
+    max-width: functions.toRem(400);
+    overflow-y: auto;
+
     mat-form-field {
       width: 100%;
     }

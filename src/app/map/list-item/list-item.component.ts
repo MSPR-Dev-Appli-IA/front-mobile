@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Listing } from '../map.service';
 
 @Component({
   selector: 'app-list-item',
@@ -6,6 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent {
-  @Input() listing!: any;
+  @Input() listing!: Listing;
   isAdditionalInfoHidden = true;
 }

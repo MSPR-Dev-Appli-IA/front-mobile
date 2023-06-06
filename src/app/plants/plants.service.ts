@@ -74,15 +74,23 @@ const SPECIES: Species[] = [
     name: 'Rose',
     description: 'truc',
     sunExposure: 'Moyenne',
-    watering: '2x/j',
+    watering: '2 fois / jour',
     optimalTemperature: '15°C'
   },
   {
-    id: 1,
+    id: 2,
     name: 'Arbre',
     description: 'truc',
     sunExposure: 'Moyenne',
-    watering: '2x/semaine',
+    watering: '2 fois / semaine',
+    optimalTemperature: '20°C'
+  },
+  {
+    id: 3,
+    name: 'Ficus Robusta',
+    description: 'truc',
+    sunExposure: 'Haute',
+    watering: '2 fois / jour',
     optimalTemperature: '20°C'
   }
 ];
@@ -97,27 +105,59 @@ const PLANTS: Plant[] = [
       id: 1,
       name: 'Ficus Robusta',
       description: 'A beautiful plantae of the bikonta subdomain.',
-      sunExposure: 'Moyenne',
+      sunExposure: 'Haute',
       watering: '2 fois / jour',
       optimalTemperature: '17°C'
     },
-    hasRequest: true,
-    hasAdvice: true
+    hasRequest: false,
+    hasAdvice: false
   },
   {
     id: 2,
-    name: 'Modulos',
+    name: 'Bo the crazy bonsai',
     description: '',
-    imageUrls: ['plant.png'],
+    imageUrls: ['bonsai.jpg'],
     species: {
       id: 1,
-      name: 'Ficus Robusta 2',
+      name: 'Bonsai',
       description: 'A beautiful plantae of the bikonta subdomain.',
       sunExposure: 'Moyenne',
+      watering: '1 fois / mois',
+      optimalTemperature: '20°C'
+    },
+    hasRequest: true,
+    hasAdvice: false
+  },
+  {
+    id: 4,
+    name: 'Garfield',
+    description: '',
+    imageUrls: ['gardenia.jpg'],
+    species: {
+      id: 1,
+      name: 'Gardénia',
+      description: 'A beautiful plantae of the bikonta subdomain.',
+      sunExposure: 'Moyenne',
+      watering: '2 fois / semaine',
+      optimalTemperature: '15°C'
+    },
+    hasRequest: false,
+    hasAdvice: true
+  },
+  {
+    id: 3,
+    name: 'Rosalia',
+    description: '',
+    imageUrls: ['rose.jpg'],
+    species: {
+      id: 1,
+      name: 'Rose',
+      description: 'A beautiful plantae of the bikonta subdomain.',
+      sunExposure: 'Basse',
       watering: '2 fois / jour',
       optimalTemperature: '15°C'
     },
     hasRequest: false,
-    hasAdvice: false
+    hasAdvice: true
   }
 ];

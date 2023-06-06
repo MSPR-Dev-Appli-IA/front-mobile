@@ -16,5 +16,7 @@
       </mat-list-item>
     </mat-nav-list>
   </div>
-  <router-outlet *ngIf="(isMobile$ | async) === false"></router-outlet>
+  <div class="profile-page__content" *ngIf="(isMobile$ | async) === false">
+    <router-outlet></router-outlet>
+  </div>
 </div>

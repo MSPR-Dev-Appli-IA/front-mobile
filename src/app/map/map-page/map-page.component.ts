@@ -16,7 +16,7 @@ import { MapService } from '../map.service';
 export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
   isMobile$: Observable<boolean>;
   map!: mapboxgl.Map;
-  listings = [];
+  listings = this.mapService.getListings();
   isViewMap = true;
 
   breakpointSubscription = new Subscription();

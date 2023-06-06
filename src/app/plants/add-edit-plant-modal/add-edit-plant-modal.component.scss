@@ -27,6 +27,11 @@
 
   &__input {
     display: flex;
+    justify-content: space-between;
+
+    mat-form-field {
+      width: 100%;
+    }
   }
 
   .button--confirm {

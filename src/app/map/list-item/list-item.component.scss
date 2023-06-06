@@ -11,6 +11,9 @@
   &__image {
     width: functions.toRem(100);
     margin-right: functions.toRem(10);
+    border-radius: functions.toRem(10);
+    height: functions.toRem(100);
+    overflow: hidden;
 
     img {
       width: 100%;

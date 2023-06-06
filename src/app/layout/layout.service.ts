@@ -26,6 +26,11 @@ export class LayoutService {
     this.previousPath.push(path);
   }
 
+  resetMobileNavigationContext() {
+    this.hideBackArrow();
+    this.previousPath = [];
+  }
+
   goBack(): void {
     this.hideBackArrow();
     this.router.navigate([this.previousPath.pop()]);
