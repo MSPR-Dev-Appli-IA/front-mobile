@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { Plant, Species, UserPlantsService } from '../plants.service';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Observable } from 'rxjs';
-import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-edit-plant-modal',
@@ -43,14 +42,16 @@ export class AddEditPlantModalComponent {
 
   savePlant() {
     this.plant.imageUrls.filter(url => url !== '');
+    console.log(this.plant);
     console.log('savePlant');
+    this.plantService.savePlant(this.plant);
     this.dialogRef.close();
   }
 
-  saveSpecies($event: Event) {
-    console.log($event);
-    console.log('saveSpecies');
-  }
+  // saveSpecies($event: Event) {
+  //   console.log($event);
+  //   console.log('saveSpecies');
+  // }
 }
 
 interface ModalData {

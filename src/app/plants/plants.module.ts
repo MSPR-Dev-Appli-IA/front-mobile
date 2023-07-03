@@ -16,6 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { AddEditPlantModalComponent } from './add-edit-plant-modal/add-edit-plant-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../auth/auth.interceptor';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    SharedModule
   ]
 })
 export class PlantsModule {}

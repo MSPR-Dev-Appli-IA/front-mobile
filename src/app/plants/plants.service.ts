@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { User } from '../auth/auth.service';
+import { AuthService, User } from '../auth/auth.service';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Injectable({
@@ -10,13 +10,23 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class UserPlantsService {
   species: any;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
   getPlants(): Observable<Plant[]> {
-    return of(PLANTS);
+    return this.http
+      .get<Plant[]>(environment.apiUrl + 'plant', {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .pipe(
+        map((res: any) => res.result),
+        shareReplay()
+      );
   }
 
   getSpecies(): Observable<Species[]> {
-    /*return this.http
+    return this.http
       .get<Species[]>(environment.apiUrl + 'species', {
         withCredentials: true,
         headers: {
@@ -24,13 +34,14 @@ export class UserPlantsService {
         }
       })
       .pipe(
-        map((res: any) => ({
-          ...res,
-          optimalTemperature: res.local.optimalTemperature + '°C'
-        })),
+        map((res: Species[]) =>
+          res.map(species => ({
+            ...species,
+            optimalTemperature: species.optimalTemperature + '°C'
+          }))
+        ),
         shareReplay()
-      );*/
-    return of(SPECIES);
+      );
   }
 
   getSpeciesById(id: number): Observable<Species | undefined> {
@@ -42,10 +53,21 @@ export class UserPlantsService {
     this.http.post('plants/' + plantId + '/ask-for-advice', {});
   }
 
-  savePlant(plant: Plant) {
-    this.http.post('plants/' + plant.id + '/save', {
-      plant: plant
-    });
+  savePlant(plant: Plant) {}
+
+  determinePlantSpecies(image: string): Observable<any> {
+    return this.http.post<any>(
+      'https://plant.id/api/v3/identification?language=fr&async=true&details=taxonomy',
+      {
+        images: [image]
+      },
+      {
+        headers: {
+          'Api-Key': environment.plantIdAPIKey,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
   }
 }
 

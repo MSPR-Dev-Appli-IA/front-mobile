@@ -13,7 +13,7 @@ import {
 export class LayoutService {
   isMobile$: Observable<boolean>;
   isBackArrowVisible: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  previousPath: string[] = [];
+  path: string[] = [];
 
   constructor(private router: Router, private responsive: BreakpointObserver) {
     this.isMobile$ = this.responsive
@@ -23,17 +23,18 @@ export class LayoutService {
 
   setMobileNavigationContext(path: string) {
     this.showBackArrow();
-    this.previousPath.push(path);
+    this.path.push(path);
   }
 
   resetMobileNavigationContext() {
     this.hideBackArrow();
-    this.previousPath = [];
+    this.path = [];
   }
 
   goBack(): void {
     this.hideBackArrow();
-    this.router.navigate([this.previousPath.pop()]);
+    this.router.navigate([this.path]);
+    this.path = this.path.length > 1 ? this.path.slice(0, -1) : [];
   }
 
   showBackArrow(): void {

@@ -25,7 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    SharedModule,
-  ],
+    SharedModule
+  ]
 })
 export class AuthModule {}
