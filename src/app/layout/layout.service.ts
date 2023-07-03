@@ -32,9 +32,13 @@ export class LayoutService {
   }
 
   goBack(): void {
-    this.hideBackArrow();
-    this.router.navigate([this.path]);
-    this.path = this.path.length > 1 ? this.path.slice(0, -1) : [];
+    this.router.navigate([...this.path]);
+    if (this.path.length < 2) {
+      this.path = [];
+      this.hideBackArrow();
+    } else {
+      this.path = this.path.slice(0, -1);
+    }
   }
 
   showBackArrow(): void {
