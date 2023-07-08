@@ -1,0 +1,37 @@
+@use "variables";
+@use "functions";
+
+.upload-image {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    color: white;
+
+    &:disabled {
+        color: white;
+    }
+  }
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    button:first-child {
+      background-color: variables.$purple-light;
+    }
+  }
+
+  img.preview {
+    width: 100%;
+    height: auto;
+  }
+}

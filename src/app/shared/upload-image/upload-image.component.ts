@@ -46,11 +46,11 @@ export class UploadImageComponent implements OnInit {
         reader.readAsDataURL(this.currentFile);
       }
     }
+
+    this.upload();
   }
 
   upload(): void {
-    this.progress = 0;
-
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
