@@ -29,4 +29,12 @@
       <mat-icon>list</mat-icon>
     </button>
   </div>
+  <button
+    type="button"
+    class="add-button"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

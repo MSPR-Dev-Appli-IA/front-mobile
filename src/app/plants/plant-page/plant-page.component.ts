@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Plant, Species, UserPlantsService } from '../plants.service';
+import { Plant, UserPlantsService } from '../plants.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AddEditPlantModalComponent } from '../add-edit-plant-modal/add-edit-plant-modal.component';

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { shareReplay, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
-import { baseApiUrl } from 'mapbox-gl';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 

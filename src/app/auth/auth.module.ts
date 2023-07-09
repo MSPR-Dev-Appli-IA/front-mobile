@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../shared/shared.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [AuthPageComponent, LoginFormComponent, RegisterFormComponent],
@@ -25,7 +26,8 @@ import { SharedModule } from '../shared/shared.module';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    MatCheckboxModule
   ]
 })
 export class AuthModule {}

@@ -1,0 +1,19 @@
+@use 'variables';
+@use 'functions';
+
+.publish-modal {
+  background-color: variables.$white;
+  border-radius: functions.toRem(10);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-height: 60%;
+  overflow: auto;
+  padding: functions.toRem(35) functions.toRem(20);
+
+  form > div {
+    display: flex;
+    flex-direction: column;
+  }
+}

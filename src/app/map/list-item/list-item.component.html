@@ -1,21 +1,31 @@
 <div class="listing">
   <div class="row">
+    <!--    <div class="listing__image">-->
+    <!--      <img [src]="'assets/img/mock/' + listing.image_url" alt="plant image" />-->
+    <!--    </div>-->
     <div class="listing__image">
-      <img [src]="'assets/img/mock/' + listing.image_url" alt="plant image" />
+      <img [src]="'assets/img/mock/begonia.jpg'" alt="plant image" />
     </div>
     <div class="column listing__info">
       <span class="listing__location">
         <mat-icon>location_on</mat-icon>
-        {{ listing.district }}
+        {{ listing.address.district }}
       </span>
-      <span listing__name>{{ listing.title }}</span>
-      <span>{{ listing.date }}</span>
+      <span listing__name>{{ listing.description }}</span>
+      <span>
+        {{ listing.start_at | date : 'shortDate' }} -
+        {{ listing.end_at | date : 'shortDate' }}
+      </span>
     </div>
   </div>
   <div class="column listing__info" [class.hidden]="isAdditionalInfoHidden">
-    <span>Exposition au soleil : {{ listing.sun_exposure }}</span>
-    <span>Arrosage : {{ listing.water_needs }}</span>
-    <span>Température Optimale : {{ listing.temperature }}</span>
+    <span>
+      Exposition au soleil : {{ listing.plant?.species?.sunExposure }}
+    </span>
+    <span>Arrosage : {{ listing.plant?.species?.watering }}</span>
+    <span>
+      Température Optimale : {{ listing.plant?.species?.optimalTemperature }}
+    </span>
     <button class="listing__button" color="" mat-raised-button>
       S'EN OCCUPER
     </button>

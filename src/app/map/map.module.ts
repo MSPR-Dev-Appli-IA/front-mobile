@@ -6,17 +6,29 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ListItemComponent } from './list-item/list-item.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from '../auth/auth.interceptor';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PublishListingModalComponent } from './publish-listing-modal/publish-listing-modal.component';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [MapPageComponent, ListItemComponent],
+  declarations: [
+    MapPageComponent,
+    ListItemComponent,
+    PublishListingModalComponent
+  ],
   imports: [
     CommonModule,
     MapRoutingModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    CdkOverlayOrigin,
+    MatDialogModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MapModule {}

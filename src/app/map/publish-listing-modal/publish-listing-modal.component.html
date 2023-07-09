@@ -1,0 +1,65 @@
+<div class="publish-modal">
+  <form name="general" [formGroup]="publishForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="general">
+      <h4>Informations generales</h4>
+      <mat-form-field>
+        <mat-label>Plante</mat-label>
+        <mat-select formControlName="plant">
+          <mat-option value="plant">plant</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="login-full-width">
+        <mat-icon matPrefix>subject</mat-icon>
+        <mat-label>Titre</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Titre"
+          formControlName="title" />
+      </mat-form-field>
+      <mat-form-field class="login-full-width">
+        <mat-label>Date de début de gardiennage</mat-label>
+        <input type="date" formControlName="start_at" matInput />
+      </mat-form-field>
+      <mat-form-field class="login-full-width">
+        <mat-label>Date de fin de gardiennage</mat-label>
+        <input type="date" formControlName="end_at" matInput />
+      </mat-form-field>
+    </div>
+    <div formGroupName="address">
+      <h4>Adresse</h4>
+      <mat-form-field>
+        <mat-label>Rue</mat-label>
+        <input
+          matInput
+          type="text"
+          name="street"
+          formControlName="street"
+          required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Quartier de la ville</mat-label>
+        <input
+          matInput
+          type="text"
+          name="district"
+          formControlName="district" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ville</mat-label>
+        <input
+          matInput
+          type="text"
+          name="city"
+          formControlName="city"
+          required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Code postale</mat-label>
+        <input matInput type="text" name="zip" formControlName="zip" required />
+      </mat-form-field>
+      <p *ngIf="(isAddressValid | async) === false">Addresse invalide</p>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

@@ -7,6 +7,8 @@ import {
 } from '@angular/cdk/layout';
 import { map, Observable, Subscription } from 'rxjs';
 import { MapService } from '../map.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { PublishListingModalComponent } from '../publish-listing-modal/publish-listing-modal.component';
 
 @Component({
   selector: 'app-map-page',
@@ -22,7 +24,8 @@ export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
   breakpointSubscription = new Subscription();
   constructor(
     private responsive: BreakpointObserver,
-    private mapService: MapService
+    private mapService: MapService,
+    public dialog: Dialog
   ) {
     this.isMobile$ = this.responsive
       .observe(Breakpoints.HandsetPortrait)
@@ -43,6 +46,15 @@ export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.map.resize();
+  }
+
+  openDialog() {
+    this.dialog.open(PublishListingModalComponent, {
+      minWidth: '400px',
+      data: {
+        plant: undefined
+      }
+    });
   }
 
   ngOnDestroy() {

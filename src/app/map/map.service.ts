@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { geojson } from './map-page/map-source';
 import { environment } from '../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Plant } from '../plants/plants.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class MapService {
   lat = 44.837789;
   lng = -0.57918;
   private apiKey = environment.mapboxApiKey;
+
+  constructor(private http: HttpClient) {}
 
   init(): mapboxgl.Map {
     return new mapboxgl.Map({
@@ -54,9 +58,46 @@ export class MapService {
     });
   }
 
-  getListings(): Observable<Listing[]> {
-    return of(LISTINGS);
+  getListings(): Observable<any> {
+    // return of(LISTINGS);
+    return this.http
+      .get<any>(environment.apiUrl + 'plantsitting')
+      .pipe(tap(listings => listings.result));
   }
+
+  getCoordinates(label: string): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + 'address/', {
+      label,
+      countryCode: 'FR'
+    });
+  }
+
+  publishListing(listing: Listing): Observable<Listing> {
+    return this.http.post<any>(environment.apiUrl + 'plantSitting/', listing);
+  }
+}
+
+export interface Location {
+  address: string;
+  location: Coordinates;
+  score: number;
+}
+
+export interface Coordinates {
+  x: number;
+  y: number;
+}
+
+export interface Listing {
+  plant?: Plant;
+  plantId?: string;
+  description: string;
+  start_at: string;
+  end_at: string;
+  address: {
+    district: string;
+    location: { x: number; y: number };
+  };
 }
 
 const LISTINGS = [
@@ -101,14 +142,3 @@ const LISTINGS = [
     image_url: 'monstera.jpg'
   }
 ];
-
-export interface Listing {
-  id: number;
-  title: string;
-  date: string;
-  district: string;
-  sun_exposure: string;
-  water_needs: string;
-  temperature: string;
-  image_url: string;
-}
