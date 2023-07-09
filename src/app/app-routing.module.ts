@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AuthGuard } from './auth/auth.guard';
+import { LegalMentionsComponent } from './shared/legal-mentions/legal-mentions.component';
+import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,14 @@ const routes: Routes = [
         path: 'messages',
         loadChildren: () =>
           import('./messages/messages.module').then(m => m.MessagesModule)
+      },
+      {
+        path: 'legal-mentions',
+        component: LegalMentionsComponent
+      },
+      {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent
       },
       { path: 'not-found', component: NotFoundComponent }
     ]

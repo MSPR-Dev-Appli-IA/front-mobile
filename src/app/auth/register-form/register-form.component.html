@@ -64,6 +64,19 @@
       Les mots de passe ne correspondent pas
     </mat-error>
   </mat-form-field>
+  <mat-checkbox class="example-margin" #checkbox>
+    Accepter la
+    <a routerLink="/privacy-policy">politique de confidentialité</a>
+    et les
+    <a routerLink="/legal-mentions">mentions légales</a>
+    .
+  </mat-checkbox>
 
-  <button mat-raised-button color="primary" type="submit">S'INSCRIRE</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!checkbox.checked">
+    S'INSCRIRE
+  </button>
 </form>
