@@ -16,6 +16,10 @@
     margin: functions.toRem(30);
     flex-direction: column;
     min-height: min-content;
+
+    .species {
+      margin: functions.toRem(30) auto;
+    }
   }
 
   &__header {

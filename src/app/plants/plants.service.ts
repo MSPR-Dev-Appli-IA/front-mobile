@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { AuthService, User } from '../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Injectable({
@@ -53,17 +53,54 @@ export class UserPlantsService {
     this.http.post('plants/' + plantId + '/ask-for-advice', {});
   }
 
-  savePlant(plant: Plant) {}
+  instanceOfFile(object: any): object is Image {
+    return 'path' in object;
+  }
+
+  savePlant(plant: Plant) {
+    const formData = new FormData();
+    formData.append('name', plant.name);
+    if (
+      plant.images &&
+      plant.images?.length > 0 &&
+      plant.images[0] instanceof File
+    )
+      formData.append('file', plant.images[0]);
+
+    return this.http.post(environment.apiUrl + 'plant', formData, {
+      withCredentials: true
+    });
+  }
+
+  // determinePlantSpecies(image: string): Observable<any> {
+  //   return this.http.post<any>(
+  //     'https://plant.id/api/v3/identification?language=fr&async=true&details=taxonomy',
+  //     {
+  //       images: [image]
+  //     },
+  //     {
+  //       headers: {
+  //         'Api-Key': environment.plantIdAPIKey,
+  //         'Content-Type': 'application/json'
+  //       }
+  //     }
+  //   );
+  // }
+}
+
+export interface Image {
+  id: string;
+  path: string;
 }
 
 export interface Plant {
   id: number;
   name: string;
   description: string;
-  imageUrls: string[];
+  images?: (Image | File)[];
   species?: Species;
-  hasRequest: boolean;
-  hasAdvice: boolean;
+  hasRequest?: boolean;
+  hasAdvice?: boolean;
 }
 
 export interface Species {
@@ -107,7 +144,7 @@ const PLANTS: Plant[] = [
     id: 1,
     name: 'Ficascio',
     description: '',
-    imageUrls: ['plant.png'],
+    // images: ['plant.png'],
     species: {
       id: 1,
       name: 'Ficus Robusta',
@@ -123,7 +160,7 @@ const PLANTS: Plant[] = [
     id: 2,
     name: 'Bo the crazy bonsai',
     description: '',
-    imageUrls: ['bonsai.jpg'],
+    // images: ['bonsai.jpg'],
     species: {
       id: 1,
       name: 'Bonsai',
@@ -139,7 +176,7 @@ const PLANTS: Plant[] = [
     id: 4,
     name: 'Garfield',
     description: '',
-    imageUrls: ['gardenia.jpg'],
+    // images: ['gardenia.jpg'],
     species: {
       id: 1,
       name: 'Gardénia',
@@ -155,7 +192,7 @@ const PLANTS: Plant[] = [
     id: 3,
     name: 'Rosalia',
     description: '',
-    imageUrls: ['rose.jpg'],
+    // images: ['rose.jpg'],
     species: {
       id: 1,
       name: 'Rose',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserPlantsService } from '../../plants/plants.service';
 
@@ -13,6 +13,7 @@ export class UploadImageComponent implements OnInit {
   progress = 0;
   message = '';
   preview = '';
+  @Output() fileUpload = new EventEmitter<File>();
 
   imageInfos?: Observable<any>;
 
@@ -56,6 +57,14 @@ export class UploadImageComponent implements OnInit {
 
       if (file) {
         this.currentFile = file;
+        this.fileUpload.emit(this.currentFile);
+
+        // this.plantService
+        //   .determinePlantSpecies(this.preview)
+        //   .subscribe((data: any) => {
+        //     console.log(data);
+        //   });
+
         //upload file
 
         // this.uploadService.upload(this.currentFile).subscribe({

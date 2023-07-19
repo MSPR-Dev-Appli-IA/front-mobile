@@ -1,11 +1,12 @@
 <div class="list-item" *ngIf="(isMobile$ | async) === false; else mobile">
   <img
-    [ngSrc]="'assets/img/mock/' + (plant.imageUrls[0] || 'plant.png')"
+    [ngSrc]="getImageSrc(plant)"
     class="list-item__image"
     [width]="100"
     [height]="100"
     priority="priority"
     alt="" />
+
   <div class="list-item__content">
     <div class="row">
       <div *ngIf="plant.species" class="list-item__details">
@@ -85,8 +86,9 @@
 <ng-template #mobile>
   <div class="list-item list-item--mobile">
     <div class="row">
+      {{ plant.images | json }}
       <img
-        [ngSrc]="'assets/img/mock/' + (plant.imageUrls[0] || 'plant.png')"
+        [ngSrc]="getImageSrc(plant)"
         class="list-item__image"
         [width]="100"
         [height]="100"

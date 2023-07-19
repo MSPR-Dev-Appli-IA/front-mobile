@@ -13,8 +13,10 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    // let isLoggedIn = false;
     // this.authService.isLoggedIn().subscribe(res => {
     //   console.log(res);
+    //   isLoggedIn = res;
     // });
     //
     // if (isLoggedIn) {

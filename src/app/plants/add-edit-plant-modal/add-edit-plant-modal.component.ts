@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Plant, Species, UserPlantsService } from '../plants.service';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-edit-plant-modal',
@@ -12,6 +13,8 @@ export class AddEditPlantModalComponent {
   plant: Plant;
   species: Observable<Species[]> | undefined;
   editMode = false;
+  image?: File;
+  foundSpecies: Observable<string | undefined> = of(undefined);
 
   constructor(
     public dialogRef: DialogRef<string>,
@@ -24,7 +27,7 @@ export class AddEditPlantModalComponent {
       : ({
           id: Math.random() * 1000,
           name: '',
-          imageUrls: [],
+          images: [],
           description: '',
           hasRequest: false,
           hasAdvice: false
@@ -32,26 +35,26 @@ export class AddEditPlantModalComponent {
     this.species = this.plantService.getSpecies();
   }
 
-  addImageInput(): void {
-    this.plant.imageUrls.push('');
-  }
+  // addImageInput(): void {
+  //   this.plant.images.push('');
+  // }
 
-  removeImageInput(idx: number): void {
-    this.plant.imageUrls.splice(idx, 1);
+  // removeImageInput(idx: number): void {
+  //   this.plant.imageUrls.splice(idx, 1);
+  // }
+
+  getFile($event: File): void {
+    this.plant.images?.push($event);
   }
 
   savePlant() {
-    this.plant.imageUrls.filter(url => url !== '');
-    console.log(this.plant);
-    console.log('savePlant');
-    this.plantService.savePlant(this.plant);
-    this.dialogRef.close();
+    this.foundSpecies = this.plantService.savePlant(this.plant).pipe(
+      map((res: any) => {
+        console.log(res);
+        return res.species.name;
+      })
+    );
   }
-
-  // saveSpecies($event: Event) {
-  //   console.log($event);
-  //   console.log('saveSpecies');
-  // }
 }
 
 interface ModalData {

@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Plant, UserPlantsService } from '../plants.service';
+import { Image, Plant, UserPlantsService } from '../plants.service';
 import { Router } from '@angular/router';
 import { AddEditPlantModalComponent } from '../add-edit-plant-modal/add-edit-plant-modal.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { LayoutService } from '../../layout/layout.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-list-item',
@@ -14,6 +15,7 @@ export class ListItemComponent {
   @Input() plant!: Plant;
   isOpen = false;
   isMobile$ = this.layoutService.isMobile$;
+  imageUrl = environment.imageUrl;
 
   constructor(
     private service: UserPlantsService,
@@ -44,5 +46,16 @@ export class ListItemComponent {
         plant: this.plant
       }
     });
+  }
+
+  instanceOfImage(object: any): object is Image {
+    return 'path' in object;
+  }
+
+  getImageSrc(plant: Plant): string {
+    if (plant.images && this.instanceOfImage(plant.images[0])) {
+      return this.imageUrl + plant.images[0].path;
+    }
+    return 'plant.jpg';
   }
 }
