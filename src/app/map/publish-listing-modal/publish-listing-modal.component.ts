@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
-import { catchError, debounceTime, Observable, of, Subscription } from 'rxjs';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Observable, switchMap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Coordinates, Listing, MapService } from '../map.service';
-import { Plant } from '../../plants/plants.service';
+import { Listing, Location, MapService } from '../map.service';
+import { Plant, UserPlantsService } from '../../plants/plants.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-publish-listing-form',
   templateUrl: './publish-listing-modal.component.html',
   styleUrls: ['./publish-listing-modal.component.scss']
 })
-export class PublishListingModalComponent {
+export class PublishListingModalComponent implements OnInit {
   publishForm!: FormGroup;
-  isAddressValid = of(true);
-  coordinates?: Observable<Coordinates>;
-  sub = new Subscription();
+  plants: Observable<Plant[]>;
+  reloadListings = new EventEmitter<void>();
 
-  constructor(private mapService: MapService) {}
+  constructor(
+    private mapService: MapService,
+    private plantService: UserPlantsService,
+    public dialogRef: DialogRef<string>
+  ) {
+    this.plants = this.plantService.getPlants();
+  }
 
   ngOnInit() {
     this.publishForm = new FormGroup({
@@ -36,41 +42,34 @@ export class PublishListingModalComponent {
         end_at: new FormControl('', [Validators.required])
       })
     });
-
-    this.sub.add(
-      this.publishForm.controls['address'].valueChanges
-        .pipe(debounceTime(500))
-        .subscribe((value: { street: string; city: string; zip: string }) => {
-          if (this.publishForm.controls['address'].valid) {
-            console.log('valid');
-            this.coordinates = this.mapService
-              .getCoordinates(Object.values(value).join(', '))
-              .pipe(
-                catchError(err => {
-                  console.log(err);
-                  this.isAddressValid = of(false);
-                  return of(err);
-                })
-              );
-          }
-        })
-    );
   }
 
   onSubmit() {
-    this.coordinates?.subscribe((coordinates: Coordinates) => {
-      this.mapService.publishListing({
-        plantId: this.publishForm.controls['general'].value.plant.id,
-        description: this.publishForm.controls['general'].value.title,
-        start_at: this.publishForm.controls['general'].value.start_at,
-        end_at: this.publishForm.controls['general'].value.end_at,
-        address: {
-          district:
-            this.publishForm.controls['address'].value.district ??
-            this.publishForm.controls['address'].value.city,
-          location: { ...coordinates }
-        }
-      } as Listing);
-    });
+    console.log('hello');
+    return this.mapService
+      .getCoordinates(
+        Object.values(this.publishForm.controls['address'].value)
+          .filter(val => !!val)
+          .join(', ')
+      )
+      .pipe(
+        switchMap((locations: Location[]) => {
+          console.log(this.publishForm.controls['general'].value.plant);
+          return this.mapService.publishListing({
+            plantId: this.publishForm.controls['general'].value.plant._id,
+            description: this.publishForm.controls['general'].value.title,
+            start_at: this.publishForm.controls['general'].value.start_at,
+            end_at: this.publishForm.controls['general'].value.end_at,
+            address: {
+              district:
+                this.publishForm.controls['address'].value.district ??
+                this.publishForm.controls['address'].value.city,
+              location: { ...locations[0].location }
+            }
+          } as Listing);
+        })
+      );
+    this.dialogRef.close();
+    this.reloadListings.emit();
   }
 }

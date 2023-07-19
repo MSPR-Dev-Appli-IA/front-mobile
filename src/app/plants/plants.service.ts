@@ -13,7 +13,7 @@ export class UserPlantsService {
   constructor(private http: HttpClient, private authService: AuthService) {}
   getPlants(): Observable<Plant[]> {
     return this.http
-      .get<Plant[]>(environment.apiUrl + 'plant', {
+      .get<{ result: Plant[] }>(environment.apiUrl + 'plant', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json'

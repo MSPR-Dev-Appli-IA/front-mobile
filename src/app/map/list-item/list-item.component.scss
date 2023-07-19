@@ -30,6 +30,10 @@
       background-color: variables.$confirm;
       color: variables.$white;
       font-weight: 600;
+
+      &:disabled {
+        opacity: 70%;
+      }
     }
 
     &.hidden {

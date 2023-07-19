@@ -10,12 +10,14 @@
   </mat-form-field>
   <div *ngIf="plants | async as plants">
     <div *ngFor="let plant of plants">
+      {{ plant | json }}
       <app-list-item [plant]="plant"></app-list-item>
     </div>
   </div>
   <button
     type="button"
     class="add-button"
+    data-umami-event="Add plant"
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
     (click)="openDialog()">

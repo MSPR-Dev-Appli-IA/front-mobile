@@ -4,7 +4,8 @@ import { geojson } from './map-page/map-source';
 import { environment } from '../../environments/environment';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Plant } from '../plants/plants.service';
+import { Plant, Species } from '../plants/plants.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class MapService {
   lat = 44.837789;
   lng = -0.57918;
   private apiKey = environment.mapboxApiKey;
+  listings: Observable<any> = of([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getListings();
+  }
 
   init(): mapboxgl.Map {
     return new mapboxgl.Map({
@@ -58,11 +62,10 @@ export class MapService {
     });
   }
 
-  getListings(): Observable<any> {
-    // return of(LISTINGS);
+  getListings(): Observable<Listing[]> {
     return this.http
-      .get<any>(environment.apiUrl + 'plantsitting')
-      .pipe(tap(listings => listings.result));
+      .get<{ result: Listing[] }>(environment.apiUrl + 'plantsitting')
+      .pipe(map(listings => listings.result));
   }
 
   getCoordinates(label: string): Observable<any> {
@@ -74,6 +77,15 @@ export class MapService {
 
   publishListing(listing: Listing): Observable<Listing> {
     return this.http.post<any>(environment.apiUrl + 'plantSitting/', listing);
+  }
+
+  makePlantRequest(listingId: string): Observable<any> {
+    return this.http.post<any>(
+      environment.apiUrl + 'plantSitting/sendRequest',
+      {
+        plantSittingId: listingId
+      }
+    );
   }
 }
 
@@ -90,7 +102,7 @@ export interface Coordinates {
 
 export interface Listing {
   plant?: Plant;
-  plantId?: string;
+  _id?: string;
   description: string;
   start_at: string;
   end_at: string;
@@ -98,6 +110,8 @@ export interface Listing {
     district: string;
     location: { x: number; y: number };
   };
+  plantInfo?: Species;
+  alreadyRequested?: boolean;
 }
 
 const LISTINGS = [

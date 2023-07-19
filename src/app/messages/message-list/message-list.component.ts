@@ -63,4 +63,9 @@ export class MessageListComponent {
   setNavigationContext(): void {
     this.layoutService.setMobileNavigationContext('messages');
   }
+
+  track() {
+    // @ts-ignore
+    window.umami.track('message-list-tab-clicked');
+  }
 }

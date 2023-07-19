@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Listing } from '../map.service';
+import { Listing, MapService } from '../map.service';
 
 @Component({
   selector: 'app-list-item',
@@ -9,4 +9,10 @@ import { Listing } from '../map.service';
 export class ListItemComponent {
   @Input() listing!: Listing;
   isAdditionalInfoHidden = true;
+
+  constructor(private mapService: MapService) {}
+
+  makeRequest(id: string) {
+    this.mapService.makePlantRequest(id).subscribe();
+  }
 }

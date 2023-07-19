@@ -26,8 +26,14 @@
     <span>
       Température Optimale : {{ listing.plant?.species?.optimalTemperature }}
     </span>
-    <button class="listing__button" color="" mat-raised-button>
-      S'EN OCCUPER
+    <button
+      class="listing__button"
+      (click)="makeRequest(listing._id ?? ''); button.disabled = true"
+      color=""
+      [disabled]="listing.alreadyRequested ?? false"
+      #button
+      mat-raised-button>
+      {{ button.disabled ? 'LA DEMANDE ENVOYÉE' : "S'EN OCCUPER" }}
     </button>
   </div>
   <button

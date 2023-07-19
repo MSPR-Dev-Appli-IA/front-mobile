@@ -8,7 +8,7 @@
         placeholder="Recherchez des plantes autour de vous" />
     </mat-form-field>
     <app-list-item
-      *ngFor="let listing of listings | async"
+      *ngFor="let listing of (listings | async) ?? []"
       [listing]="listing"></app-list-item>
   </div>
   <div
@@ -33,6 +33,7 @@
     type="button"
     class="add-button"
     cdkOverlayOrigin
+    data-umami-event="Submit plant-sitting"
     #trigger="cdkOverlayOrigin"
     (click)="openDialog()">
     <mat-icon>add</mat-icon>

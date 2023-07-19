@@ -2,13 +2,12 @@
   <mat-icon matPrefix>search</mat-icon>
   <input matInput type="text" placeholder="Rechercher" [value]="searchValue" />
 </mat-form-field>
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="track()">
   <mat-tab label="MESSAGES">
     <app-list-item
       *ngFor="let conversation of messages | async"
       [selected]="selectedConversationId === conversation.id"
       (selectConversation)="selectConversation($event)"
-      (click)="setNavigationContext()"
       [routerLink]="
         (isMobile$ | async) ? ['mobile', conversation.id] : [conversation.id]
       "
@@ -20,7 +19,6 @@
       *ngFor="let conversation of demands | async"
       [selected]="selectedConversationId === conversation.id"
       (selectConversation)="selectConversation($event)"
-      (click)="setNavigationContext()"
       [routerLink]="
         (isMobile$ | async) ? ['mobile', conversation.id] : [conversation.id]
       "
@@ -31,7 +29,6 @@
       *ngFor="let conversation of advices | async"
       [selected]="selectedConversationId === conversation.id"
       (selectConversation)="selectConversation($event)"
-      (click)="setNavigationContext()"
       [routerLink]="
         (isMobile$ | async) ? ['mobile', conversation.id] : [conversation.id]
       "
