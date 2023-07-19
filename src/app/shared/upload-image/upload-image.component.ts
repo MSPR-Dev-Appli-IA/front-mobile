@@ -56,13 +56,6 @@ export class UploadImageComponent implements OnInit {
 
       if (file) {
         this.currentFile = file;
-
-        this.plantService
-          .determinePlantSpecies(this.preview)
-          .subscribe((data: any) => {
-            console.log(data);
-          });
-
         //upload file
 
         // this.uploadService.upload(this.currentFile).subscribe({

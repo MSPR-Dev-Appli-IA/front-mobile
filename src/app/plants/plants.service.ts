@@ -54,21 +54,6 @@ export class UserPlantsService {
   }
 
   savePlant(plant: Plant) {}
-
-  determinePlantSpecies(image: string): Observable<any> {
-    return this.http.post<any>(
-      'https://plant.id/api/v3/identification?language=fr&async=true&details=taxonomy',
-      {
-        images: [image]
-      },
-      {
-        headers: {
-          'Api-Key': environment.plantIdAPIKey,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-  }
 }
 
 export interface Plant {
